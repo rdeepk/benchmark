@@ -1,27 +1,71 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
+// var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
+// var request = require('request');
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
+const jwtAuthz = require('express-jwt-authz');
 
-// On our router variable, we'll be able to include various methods. For our app we'll only make use of GET requests, so the method router.get will handle that interaction. This method takes a string as its first parameter and that is the url path, so for the first route we are just giving it '/', which means the default route. Next we are defining a Node Js callback function, that takes three parameters, a request (req), a response (res), and an optional next (next) parameter. Finally, in our callback function, we are just send the message "You are on the homepage".
+
+const checkJwt = jwt({
+    // Dynamically provide a signing key based on the kid in the header and the singing keys provided by the JWKS endpoint.
+    secret: jwksRsa.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
+    }),
+  
+    // Validate the audience and the issuer.
+    audience: process.env.AUTH0_AUDIENCE,
+    issuer: `https://${process.env.AUTH0_DOMAIN}/`,
+    algorithms: ['RS256']
+  });
+
+// We are going to want to share some data between our server and UI, so we'll be sure to pass that data in an env variable.
+// var env = {
+// };
+
 router.get('/', function(req, res, next) {
-  res.send('You are on the homepage');
+  // Now, rather then just sending the text "You are on the homepage", we are going to actually render the view we created using the res.render method. The second argument will allow us to pass in data from the backend to our view dynamically.
+  res.send('index');
 });
 
-// We are going to do the same thing for the remaining routes.
 router.get('/login',function(req, res){
-  res.send('You are on the login page');
+  // Same thing for the login page.
+  
+  res.send('login');
 });
 
 router.get('/logout', function(req, res){
-  res.send('You are on the logout page');
+  req.logout();
+  res.redirect('/login');
 });
 
-router.get('/polls', function(req, res){
-  res.send('You are on the polls page');
+router.get('/bulletin', checkJwt, jwtAuthz(['read:bulletin']), function(req, res){
+    res.send('bulletin msgs');
 })
 
-router.get('/user', function(req, res, next) {
-  res.send('You are on the user page');
-});
+// router.get('/user', ensureLoggedIn, function(req, res, next) {
+//   // Same thing for our 
+//   res.render('user', { env: env, user: req.user });
+// });
 
-// Finally, we export this module so that we can import it in our app.js file and gain access to the routes we defined.
+
+// var env = {
+//     AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+//     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+//     AUTH0_CALLBACK_URL: 'http://localhost:3000/callback'
+//   };
+  
+  // ...
+  
+  // We are also going to implement the callback route which will redirect the logged in user to the polls page if authentication succeeds.
+//   router.get('/callback',
+//     passport.authenticate('auth0', { failureRedirect: '/' }),
+//     function(req, res) {
+//       res.redirect(req.session.returnTo || '/bulletin');
+//     });
+
 module.exports = router;

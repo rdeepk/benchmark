@@ -1,33 +1,25 @@
 import React, { Component } from 'react'; 
+import { Route, Link } from 'react-router-dom';
+// import Bulletin from './Bulletin';
+import { login, logout, isLoggedIn } from '../utils/AuthService';
 
 class Login extends Component {
+    showLock= () => {
+        // Show the Auth0Lock widget
+        this.props.lock.show();
+      }
+
   render() {
     return (
-        <div className="login">
-        <div className="connected">
-          <div className="row">
-          <div className="col-sm-5">
-            <img src="../img/unnamed.jpg" alt="identity" id="creatorImage" />
-          </div>
-          <div className="col-sm-7">
-            <div className="infoConnected">
-            <form className="loginForm" onSubmit={this.usernameSubmitHandler}>
-              <div class="form-group">
-                              <label for="username">Tell me about yourself...</label>
-                              <input type="text" id="username" placeholder="Enter a username..." onChange={this.usernameChangeHandler} className="form-control" required="required"/>
-                          </div>
-              <input type="submit" id="yourEnter" value="Submit" className="btn btn-primary" />
-            </form>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-sm-12">
-            {/* <div className="error">{error? error: null}</div> */}
-          </div>
-        </div>
-        
-        </div>
+        <div> 
+            {/* <Link to="/bulletin">Login</Link> */}
+            {/* <a onClick={this.showLock}>Sign In</a> */}
+            {
+             ( isLoggedIn() ) ? <Link to="/bulletin">Board</Link> :  ''
+            }
+             {
+             (isLoggedIn()) ? ( <button className="btn" onClick={() => logout()}>Log out </button> ) : ( <button className="btn btn-info log" onClick={() => login()}>Log In</button> )
+           }
       </div>
     );
   }
