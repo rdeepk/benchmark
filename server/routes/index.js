@@ -1,8 +1,6 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
-// var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
-// var request = require('request');
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const jwtAuthz = require('express-jwt-authz');
@@ -43,29 +41,10 @@ router.get('/logout', function(req, res){
   res.redirect('/login');
 });
 
-router.get('/bulletin', checkJwt, jwtAuthz(['read:bulletin']), function(req, res){
+router.get('/bulletin', checkJwt, jwtAuthz(['read:all']), function(req, res){
+  console.log(checkJwt);
+  console.log(jwtAuthz);
     res.send('bulletin msgs');
 })
-
-// router.get('/user', ensureLoggedIn, function(req, res, next) {
-//   // Same thing for our 
-//   res.render('user', { env: env, user: req.user });
-// });
-
-
-// var env = {
-//     AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
-//     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
-//     AUTH0_CALLBACK_URL: 'http://localhost:3000/callback'
-//   };
-  
-  // ...
-  
-  // We are also going to implement the callback route which will redirect the logged in user to the polls page if authentication succeeds.
-//   router.get('/callback',
-//     passport.authenticate('auth0', { failureRedirect: '/' }),
-//     function(req, res) {
-//       res.redirect(req.session.returnTo || '/bulletin');
-//     });
 
 module.exports = router;
