@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-var Class = mongoose.model('Class', {
+var Grade = mongoose.model('Grade', {
     name: {
         type: String,
         required: true,
@@ -17,5 +17,5 @@ var Class = mongoose.model('Class', {
 });
 
 module.exports = {
-    Class
+    Grade
 };

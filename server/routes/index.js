@@ -23,5 +23,10 @@ const jwtAuthz = require('express-jwt-authz');
     console.log(req.user);
       res.send('bulletin msgs');
   })
+
+  router.get('/classes', config.checkJwt, jwtAuthz(['read:all']), function(req, res){
+    console.log(req.user);
+      res.send('classes');
+  })
   
   module.exports = router;

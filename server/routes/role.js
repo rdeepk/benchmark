@@ -2,11 +2,8 @@ var express = require('express');
 var router = express.Router();
 const config = require('./config');
 const jwtAuthz = require('express-jwt-authz');
-var user = require('./../controllers/user');
+var role = require('./../controllers/role');
 
-router.post('/create', config.checkJwt, user.create);
+router.post('/create', config.checkJwt, role.create);
   
 module.exports = router;
-
-
-

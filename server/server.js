@@ -25,16 +25,15 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// const user = require('./routes/user');
-// const index = require('./routes/index');
-
-// app.use("/user", user);
-// app.use("/bulletin", index);
-// app.use("/tor", tor);
-// app.use("/van", van);
 var index = require('./routes/index');
-app.use('/', index);
+var grade = require('./routes/grade');
+var user = require('./routes/user');
+var role = require('./routes/role');
 
+app.use('/', index);
+app.use('/grade', grade);
+app.use('/user', user);
+app.use('/role', role);
 
 // catch 404 and forward to error handler.
 app.use(function(req, res, next) {
