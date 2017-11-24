@@ -1,7 +1,7 @@
 const express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
-    router = express.Router(),
+    // router = express.Router(),
     dotenv = require('dotenv');
 var port = process.env.PORT || 8080;
 var cors = require('cors')
@@ -14,9 +14,6 @@ dotenv.load();
 
 app.use(cors());
 
-var routes = require('./routes/index');
-app.use('/', routes);
-
 // app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,6 +24,17 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
+
+// const user = require('./routes/user');
+// const index = require('./routes/index');
+
+// app.use("/user", user);
+// app.use("/bulletin", index);
+// app.use("/tor", tor);
+// app.use("/van", van);
+var index = require('./routes/index');
+app.use('/', index);
+
 
 // catch 404 and forward to error handler.
 app.use(function(req, res, next) {
