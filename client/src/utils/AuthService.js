@@ -1,13 +1,13 @@
 import decode from 'jwt-decode';
-// import { browserHistory } from 'react-router';
+import { Route } from 'react-router-dom';
 import auth0 from 'auth0-js';
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 
-const CLIENT_ID = 'lQ0GauBuyJbVtSQSsQ57jXJ6UsD6bD3l';
+const CLIENT_ID = '9UEtyOoCazl0pohRwAja0DlV3hfPd6L2';
 const CLIENT_DOMAIN = 'bench.auth0.com';
 const REDIRECT = 'http://localhost:3000/callback';
-const SCOPE = 'read:all';
+// const SCOPE = 'read:all';
 const AUDIENCE = 'localhost:8080';
 
 var auth = new auth0.WebAuth({
@@ -19,15 +19,15 @@ export function login() {
   auth.authorize({
     responseType: 'token id_token',
     redirectUri: REDIRECT,
-    audience: AUDIENCE,
-    scope: SCOPE
+    audience: AUDIENCE
+    // scope: SCOPE
   });
 }
 
 export function logout() {
   clearIdToken();
   clearAccessToken();
-//   browserHistory.push('/');
+  // browserHistory.push('/');)
 }
 
 export function requireAuth(nextState, replace) {

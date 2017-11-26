@@ -39,12 +39,13 @@ saveUserInAuth0 = (doc) => {
     'content-type': 'application/json'
   },
   body: {
-    app_metadata: {'roles':['teacher']},
+    app_metadata: {'roles':['admin']},
     user_metadata: {id: doc._id,},
     email: doc.email,
     email_verified: false,
     connection: "Initial-Connection",
-    password: ""
+    password: "12345",
+    given_name:"RK"
   },
   json: true };
   console.log(options);

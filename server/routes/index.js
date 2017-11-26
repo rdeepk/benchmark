@@ -19,14 +19,19 @@ const jwtAuthz = require('express-jwt-authz');
 //     res.redirect('/login');
 //   });
   
-  router.get('/bulletin', config.checkJwt, jwtAuthz(['read:all']), function(req, res){
-    console.log(req.user);
-      res.send('bulletin msgs');
-  })
+  // router.get('/bulletin', config.checkJwt, function(req, res){
+  //   console.log(req.user);
+  //     res.send('bulletin msgs');
+  // })
 
-  router.get('/classes', config.checkJwt, jwtAuthz(['read:all']), function(req, res){
+  router.get('/classes', config.checkJwt, function(req, res){
     console.log(req.user);
       res.send('classes');
+  })
+
+  router.get('/links', config.checkJwt, function(req, res){
+    console.log(req.user);
+      res.send('links');
   })
   
   module.exports = router;
