@@ -61,7 +61,14 @@ bulletinController.update = (req, res, next) => {
       owner: decoded.bench_user_metadata.id
     };
 
-    Bulletin.findOneAndUpdate(req.query.id, newMessage, {new: true}, function(err, doc){
+    // var query = {'username':req.user.username};
+    // req.newData.username = req.user.username;
+    // Bulletin.findOneAndUpdate(query, req.newData, {upsert:true}, function(err, doc){
+    //     if (err) return res.send(500, { error: err });
+    //     return res.send("succesfully saved");
+    // });
+
+    Bulletin.findOneAndUpdate({_id: req.query.id}, newMessage, {new: true}, function(err, doc){
       console.log(err);
       if (err) return res.status(400).send(err);
       return res.send(doc);
