@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-// import Login from './Login';
 import Header from './Header';
 import Callback from '../components/Callback';
 import Sidebar from './Sidebar';
@@ -32,29 +31,73 @@ class App extends Component {
      this.setState({
        loading: true
      })
-  //    console.log(getAccessToken())
-  //   const url = 'http://localhost:8000/bulletin/messages';
-  //   axios.get(url,  { headers: { Authorization: `Bearer ${getAccessToken()}` }})
-  //   .then((response) => {
-  //     console.log(response);
-  //   this.setState({
-  //     resp: response.data
-  //   })
-  // })
-  //   .catch((error) => {
-  //   console.log(error);
-  // });
-    // getLinks()
-    //   .then((data) => {
-    //     console.log(data);
-    // });
+
     getBulletin()
     .then((data) => {
-      this.setState({
-        bulletin: data
-      })
-      this.setActiveLink('bulletin', data);
-  });
+        this.setState({
+          bulletin: data
+        })
+        this.setActiveLink('bulletin', data);
+      });
+   }
+
+   setBulletinState = (action, data) => {
+    switch(action) {
+      case 'addNew':
+        this.addNewBulletin(data);
+      break;
+      case 'update':
+        this.updateBulletin(data.id, data.message);
+      break;
+      case 'delete':
+        this.deleteBulletin(data.id);
+      break;
+    }
+   }
+
+   addNewBulletin = (data) => {
+    let { bulletin } = this.state;
+    bulletin.messages.push(data);
+    this.setState({
+      bulletin: bulletin
+    })
+   }
+
+   updateBulletin = (id, data) => {
+    let { bulletin } = this.state;
+    let newMessages = bulletin.messages.map((message, key) => {
+      if(message._id === id) {
+        message.message = data;
+      }
+      return  message;
+    })
+
+    let newState = {
+      writeAccess: bulletin.writeAccess,
+      messages: newMessages
+    }
+
+    this.setState({
+      bulletin: newState
+    },()=>{
+      console.log(this.state.bulletin)
+    })
+   }
+
+   deleteBulletin = (id) => {
+    let { bulletin } = this.state;
+    let newMessages = bulletin.messages.filter((message, key) => {
+        return message._id !== id
+    })
+
+    let newState = {
+      writeAccess: bulletin.writeAccess,
+      messages: newMessages
+    }
+
+    this.setState({
+      bulletin: newState
+    })
    }
 
   render() {
@@ -73,7 +116,7 @@ class App extends Component {
             <Sidebar setActiveLink={this.setActiveLink} />
           </div>
           <div className="col-sm-8">
-            <Content activeLink ={this.state.activeLink} bulletin={this.state.bulletin}/>
+            <Content activeLink ={this.state.activeLink} bulletin={this.state.bulletin} setBulletinState={this.setBulletinState}/>
           </div>
         </div>
         <Route path="/callback" exact render={(props) => (<Callback />

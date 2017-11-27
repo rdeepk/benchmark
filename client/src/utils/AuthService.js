@@ -7,7 +7,7 @@ const ACCESS_TOKEN_KEY = 'access_token';
 const CLIENT_ID = '9UEtyOoCazl0pohRwAja0DlV3hfPd6L2';
 const CLIENT_DOMAIN = 'bench.auth0.com';
 const REDIRECT = 'http://localhost:3000/callback';
-// const SCOPE = 'read:all';
+const SCOPE = 'openid profile email read:all';
 const AUDIENCE = 'localhost:8080';
 
 var auth = new auth0.WebAuth({
@@ -19,8 +19,8 @@ export function login() {
   auth.authorize({
     responseType: 'token id_token',
     redirectUri: REDIRECT,
-    audience: AUDIENCE
-    // scope: SCOPE
+    audience: AUDIENCE,
+    scope: SCOPE
   });
 }
 
