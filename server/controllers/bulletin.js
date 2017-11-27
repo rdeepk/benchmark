@@ -17,7 +17,7 @@ let _hasWriteAccess = (role) => {
 
 bulletinController.create = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
-  let role = decoded.bench_app_metadata.roles[0];
+  let role = decoded.bench_app_metadata.role;
   if(role === 'admin' || role === 'teacher') {
     var newMessage = new Bulletin({
       message: req.body.message,
@@ -37,7 +37,7 @@ bulletinController.create = (req, res, next) => {
 bulletinController.getMessages = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   console.log(decoded);
-  let role = decoded.bench_app_metadata.roles[0];
+  let role = decoded.bench_app_metadata.role;
   Bulletin.find().then((messages) => {
     let response = {
       writeAccess:  _hasWriteAccess(role),
@@ -52,21 +52,13 @@ bulletinController.getMessages = (req, res, next) => {
 }
 
 bulletinController.update = (req, res, next) => {
-  console.log("update");
   let decoded = jwtDecode(req.headers.id_token);
-  let role = decoded.bench_app_metadata.roles[0];
+  let role = decoded.bench_app_metadata.role;
   if(role === 'admin' || role === 'teacher') {
     var newMessage = {
       message: req.body.message,
       owner: decoded.bench_user_metadata.id
     };
-
-    // var query = {'username':req.user.username};
-    // req.newData.username = req.user.username;
-    // Bulletin.findOneAndUpdate(query, req.newData, {upsert:true}, function(err, doc){
-    //     if (err) return res.send(500, { error: err });
-    //     return res.send("succesfully saved");
-    // });
 
     Bulletin.findOneAndUpdate({_id: req.query.id}, newMessage, {new: true}, function(err, doc){
       console.log(err);
@@ -79,9 +71,8 @@ bulletinController.update = (req, res, next) => {
 }
 
 bulletinController.delete = (req, res, next) => {
-  console.log("delete");
   let decoded = jwtDecode(req.headers.id_token);
-  let role = decoded.bench_app_metadata.roles[0];
+  let role = decoded.bench_app_metadata.role;
   if(role === 'admin' || role === 'teacher') {
     Bulletin.findOneAndRemove({_id: req.query.id}).then((message) => {
       if (!message) {
