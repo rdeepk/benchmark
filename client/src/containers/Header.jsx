@@ -8,7 +8,7 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        {(isLoggedIn()) ? ( <button className="btn" onClick={() => logout()}>Log out </button> ) : ( <button className="btn btn-info log" onClick={() => login()}>Log In/Sign Up</button> )}
+        {(isLoggedIn()) ? ( <a href="" className="btn" onClick={() => logout()}>Log out </a> ) : ( <button className="btn btn-info log" onClick={() => login()}>Log In/Sign Up</button> )}
       </div>
     );
   }

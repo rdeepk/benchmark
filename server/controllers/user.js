@@ -1,6 +1,7 @@
 
 var {mongoose} = require('./../db/mongoose');
 var {User} = require('./../models/user');
+var {Role} = require('./../models/role');
 var request = require("request-promise");
 var jwtDecode = require('jwt-decode');
 
@@ -32,30 +33,34 @@ getToken = () => {
 }
 
 saveUserInAuth0 = (doc) => {
-  var options = { method: 'POST',
-  url: 'https://bench.auth0.com/api/v2/users',
-  headers: { 
-    'authorization': `Bearer ${token}`,
-    'content-type': 'application/json'
-  },
-  body: {
-    app_metadata: {'roles':['admin']},
-    user_metadata: {id: doc._id,},
-    email: doc.email,
-    email_verified: false,
-    connection: "Initial-Connection",
-    password: "12345",
-    given_name:"RK"
-  },
-  json: true };
-  console.log(options);
-  request(options)
-    .then((body)=> {
-      console.log(body);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  Role.findOne({_id: doc.role}).then((role) => {
+    let options = { method: 'POST',
+    url: 'https://bench.auth0.com/api/v2/users',
+    headers: { 
+      'authorization': `Bearer ${token}`,
+      'content-type': 'application/json'
+    },
+    body: {
+      app_metadata: {'role':role.name},
+      user_metadata: {id: doc._id,},
+      email: doc.email,
+      email_verified: false,
+      connection: "Initial-Connection",
+      password: "12345",
+      given_name: doc.name
+    },
+    json: true };
+    console.log(options);
+    request(options)
+      .then((body)=> {
+        console.log(body);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, (e) => {
+    res.status(400).send(e);
+  });
 }
 
 setUserForAuth0 = (doc) => {
@@ -82,12 +87,6 @@ userController.create = (req,res,next) => {
       role: req.body.role,
       email: req.body.email
     });
-
-    let doc = { '__v': 0,
-    name: 'Chris',
-    role: '5a18653fce51ea1a53173f5b',
-    email: 'rdeepk+t4@gmail.com',
-    _id: '5a18a26b38051d7d7fa0fc21' }
 
     newUser.save().then((doc) => {
       setUserForAuth0(doc);

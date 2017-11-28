@@ -11,7 +11,6 @@ class Sidebar extends Component {
         {( isLoggedIn() ) ? 
             <div>
             <Link to="/bulletin">Bulletin Board</Link><br />
-            <Link to="/teachers">Teachers</Link><br />
             <Link to="/grades">Grades</Link>
             </div>
           :  ''}
