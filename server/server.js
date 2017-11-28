@@ -24,26 +24,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //   saveUninitialized: true
 // }));
 
-var index = require('./routes/index');
+// var index = require('./routes/index');
 var grade = require('./routes/grade');
 var user = require('./routes/user');
 var role = require('./routes/role');
 var invite = require('./routes/invite');
 var bulletin = require('./routes/bulletin');
+var teacher = require('./routes/teacher');
 
-app.use('/', index);
-app.use('/links', index);
+// app.use('/', index);
+// app.use('/links', index);
 app.use('/grade', grade);
 app.use('/user', user);
 app.use('/role', role);
 app.use('/invite', invite);
 app.use('/bulletin', bulletin);
+app.use('/teacher', teacher);
 
 
 
 // catch 404 and forward to error handler.
 app.use(function(req, res, next) {
-  console.log("nor");
   var err = new Error('Not Found');
   err.status = 404;
   next(err);

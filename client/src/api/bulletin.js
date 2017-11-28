@@ -52,9 +52,9 @@ export function getBulletin() {
     console.log(ID_TOKEN_KEY);
     let bulletins = localStorage.getItem(BULLETINS);
     return new Promise((resolve, reject) => {
-        // if(bulletins) {
-        //    resolve(JSON.parse(bulletins));
-        // }
+        if(bulletins) {
+           resolve(JSON.parse(bulletins));
+        }
         axios.get(`${baseUrl}/bulletin/messages`,  { headers: { 
                         Authorization: `Bearer ${ACCESS_TOKEN_KEY}`,
                         id_token: ID_TOKEN_KEY

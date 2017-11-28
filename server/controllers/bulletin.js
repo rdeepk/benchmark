@@ -36,14 +36,12 @@ bulletinController.create = (req, res, next) => {
 
 bulletinController.getMessages = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
-  console.log(decoded);
   let role = decoded.bench_app_metadata.role;
   Bulletin.find().then((messages) => {
     let response = {
       writeAccess:  _hasWriteAccess(role),
       messages: messages
     }
-    console.log(response);
     res.json(response)
   }, (e) => {
     console.log(e);

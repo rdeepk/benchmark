@@ -1,20 +1,37 @@
 import axios from 'axios';
 import { getAccessToken, getIdToken } from '../utils/AuthService';
-
 const baseUrl = 'http://localhost:8000';
-const access_token = getAccessToken();
-const id_token = getIdToken();
+const ACCESS_TOKEN_KEY = getAccessToken();
+const ID_TOKEN_KEY = getIdToken();
 
 
 export function getLinks() {
-    console.log(access_token);
     return new Promise((resolve, reject) => {
-        axios.get(`${baseUrl}/links`,  { headers: { 
-                                Authorization: `Bearer ${access_token}`,
-                                IdToken: id_token
+        axios.get(`${baseUrl}/user/links`,  { headers: { 
+                                Authorization: `Bearer ${ACCESS_TOKEN_KEY}`,
+                                id_token: ID_TOKEN_KEY
                                     }
                                 })
             .then((response) => {
+                console.log(response);
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+      })
+}
+
+
+export function getGrades(endPoint) {
+    return new Promise((resolve, reject) => {
+        axios.get(`${baseUrl}${endPoint}`,  { headers: { 
+                                Authorization: `Bearer ${ACCESS_TOKEN_KEY}`,
+                                id_token: ID_TOKEN_KEY
+                                    }
+                                })
+            .then((response) => {
+                console.log(response);
                 resolve(response.data);
             })
             .catch((error) => {

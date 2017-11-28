@@ -96,11 +96,55 @@ userController.create = (req,res,next) => {
     });
    }
 
+
+userController.getLinks = (req,res,next) => {
+  let decoded = jwtDecode(req.headers.id_token);
+  let role = decoded.bench_app_metadata.role;
+  let links;
+  switch(role) {
+    case 'teacher':
+    case 'admin':
+      links = {
+        role: 'teacher',
+        grades: '/teacher/grades',
+        students: '/grades/students',
+        attendance: '/students/attendance'
+      }
+      break;
+      case 'parent':
+      links = {
+        role: 'parent',
+        students: '/parents/students',
+        attendance: '/students/attendance'
+      }
+      break;
+      case 'student':
+      links = {
+        role: 'student',
+        attendance: '/students/attendance'
+      }
+      break;
+  }
+    res.send(links);
+  
+}
+
+
+
 userController.SaveAllUsersInAuth0 = (req, res, next) => {
   User.find().then((users) => {
    users.forEach((user, i) => {
       setUserForAuth0(user);
    })
+  });
+}
+
+userController.getUserById = (req, res, next) => {
+  User.findOne({_id: req.query.id})
+  .then((user) => {
+    res.send(user);
+  }, (e) => {
+    res.status(400).send(e);
   });
 }
 

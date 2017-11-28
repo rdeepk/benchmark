@@ -5,7 +5,6 @@ import Callback from '../components/Callback';
 import Sidebar from './Sidebar';
 import Content from './Content';
 import { requireAuth, getAccessToken } from '../utils/AuthService';
-import {getLinks} from '../api/api';
 import {getBulletin} from '../api/bulletin';
 import axios from 'axios';
 
@@ -16,7 +15,8 @@ class App extends Component {
       activeLink: "bulletin",
       bulletin: "",
       content: "",
-      loading: false
+      loading: false,
+      grades:''
     }
   }
 
@@ -27,6 +27,13 @@ class App extends Component {
       loading:false
     })
   }
+
+  setGradesState = (grades) => {
+    this.setState({
+      grades: grades
+    })
+  }
+
    componentDidMount() {
      this.setState({
        loading: true
@@ -113,10 +120,14 @@ class App extends Component {
         <Header />
         <div className="row">
           <div className="col-sm-4">
-            <Sidebar setActiveLink={this.setActiveLink} />
+            <Sidebar setActiveLink={this.setActiveLink} setGradesState={this.setGradesState} />
           </div>
           <div className="col-sm-8">
-            <Content activeLink ={this.state.activeLink} bulletin={this.state.bulletin} setBulletinState={this.setBulletinState}/>
+            <Content  activeLink ={this.state.activeLink}
+                      bulletin={this.state.bulletin}
+                      setBulletinState={this.setBulletinState}
+                      grades={this.state.grades}
+                      />
           </div>
         </div>
         <Route path="/callback" exact render={(props) => (<Callback />
