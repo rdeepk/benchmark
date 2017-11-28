@@ -29,12 +29,10 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="sidebar">
-        {( isLoggedIn() ) ? 
-            <div>
-            <Link to="/bulletin">Bulletin Board</Link><br />
-            {this.state.role === 'teacher' && <Link to="/grades">Grades</Link>}
-            </div>
-          :  ''}
+        <ul>
+          <li><Link to="/bulletin"><i class="fa fa-bell" aria-hidden="true"></i><span>Notice Board</span></Link></li>
+          {isLoggedIn() && this.state.role === 'teacher' && <Link to="/grades"><i class="fa fa-signal" aria-hidden="true"></i><span>Attendance</span></Link>}
+        </ul>
       </div>
     );
   }

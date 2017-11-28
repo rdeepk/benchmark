@@ -24,7 +24,12 @@ bulletinController.create = (req, res, next) => {
       owner: decoded.bench_user_metadata.id
     });
     newMessage.save().then((doc) => {
-      res.send(doc);
+      Bulletin.populate(newMessage, {path:"owner"}, function(err, bulletin) {
+        res.send(bulletin);
+      }, (e) => {
+        console.log(e);
+        res.status(400).send(e);
+      });
     }, (e) => {
       console.log(e);
       res.status(400).send(e);
@@ -37,7 +42,9 @@ bulletinController.create = (req, res, next) => {
 bulletinController.getMessages = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
-  Bulletin.find().then((messages) => {
+  Bulletin.find()
+  .populate("owner")
+  .exec(function(err,messages) {
     let response = {
       writeAccess:  _hasWriteAccess(role),
       messages: messages

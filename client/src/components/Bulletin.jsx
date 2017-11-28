@@ -48,27 +48,45 @@ class Bulletin extends Component {
    render() {
     const { bulletin } = this.props;
     return (
-        <div>
+        <div className="notice">
             {this.props.writeAccess ?
                 <div>
-                    <span className="message">{bulletin.message}</span>
-                    <a href="" id={bulletin._id} onClick={(e) => {this.toggleEditFormDisplay(e)}} >Edit</a>
-                    <div style={{ display: this.state.displayEditBulletinForm }} className="edit">
-                          <div className="row">
-                              <div className="col-md-10 col-md-offset-1">
-                                  <form id="editBulletinForm" ref={(form) => { this.form = form }} onChange={(e) => { this.setEditedValue(e) }}>
-                                      <div className="form-group">
-                                          <label htmlFor="title">Message:</label>
-                                          <input type="text" id={bulletin._id} name="message" value={this.state.bulletin.message} required="required" className="form-control" />
-                                      </div>
-                                      <button type="submit" onClick={(e) => {this.handleEditFormSubmit(e)}}>Done</button>
-                                  </form>
-                              </div>
-                          </div>
-                      </div>
-                    <a href="" id={bulletin._id} value={bulletin.message} onClick={(e) => {this.deleteBulletin(e)}} >Delete</a>
+                    <div className="row">
+                        <div className="col-sm-10">
+                            <div className="message">{bulletin.message}</div>
+                            <div className="owner">By: {bulletin.owner.name}</div>
+                            <div className="date">Date: {bulletin.created_at}</div>
+                        </div>
+                        <div className="col-sm-2">
+                            <a href="" id={bulletin._id} onClick={(e) => {this.toggleEditFormDisplay(e)}} ><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="" value={bulletin.message} onClick={(e) => {this.deleteBulletin(e)}} ><i id={bulletin._id} class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div style={{ display: this.state.displayEditBulletinForm }} className="edit">
+                                <div className="row">
+                                    <div className="col-md-10 col-md-offset-1">
+                                        <form id="editBulletinForm" ref={(form) => { this.form = form }} onChange={(e) => { this.setEditedValue(e) }}>
+                                            <div className="form-group">
+                                                <label htmlFor="title">Message:</label>
+                                                <input type="text" id={bulletin._id} name="message" value={this.state.bulletin.message} required="required" className="form-control" />
+                                            </div>
+                                            <input class="btn btn-primary" type="submit" onClick={(e) => {this.handleEditFormSubmit(e)}} value="Done" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                :  <div className="message">{bulletin.message}</div>}
+                :  <div className="row">
+                        <div className="col-sm-12">
+                            <div className="message">{bulletin.message}</div>
+                            <div className="owner">By: {bulletin.owner.name}</div>
+                            <div className="date">Date: {bulletin.created_at}</div>
+                        </div>
+                    </div>}
         </div>
    );
   }

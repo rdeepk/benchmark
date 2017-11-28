@@ -1,13 +1,140 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  color: #333;
+  font-size: 14px;
+}
+
+a {
+  color: #333;
+}
+
+a:hover {
+  color: #333;
+  text-decoration: none;
 }
 
 .header {
-  background: black;
-  color: #fff;
+  background: transparent;
+  font-size: 14px;
+  padding: 20px 0;
+  border-bottom: 1px solid #f1f1f1;
+  margin-bottom: 30px;
 }
-.sidebar {
-  background: #ccc;
+
+.login {
+  text-align: right;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+  padding-left: 2px;
+  color: #5d676f;
+}
+
+.sidebar ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  margin-bottom: 14px;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+}
+
+.sidebar a {
+  color: rgba(0,0,0,0.86);
+  letter-spacing: .3px;
+  font-size: 13px;
+}
+
+.sidebar a i {
+  position: relative;
+  /* top: 4px; */
+  font-size: 13px;
+  margin-right: 4px;
+  width: 17px;
+  display: inline-block;
+}
+
+.content h1 {
+  display: inline-block;
+  font-weight: 400;
+  min-height: 60px;
+  min-width: 1px;
+  vertical-align: bottom;
+}
+
+.content .btn.btn-success, .content-header .btn-default.new {
+  padding: 12px 20px;
+}
+
+.btn, a.btn {
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.btn {
+  letter-spacing: .08em;
+}
+
+.btn {
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-success   {
+  color: #fff;
+  background-color: #eb5424;
+  border-color: #e14615;
+}
+
+.btn i, a.btn i {
+  font-size: 13px;
+  position: relative;
+  top: 2px;
+  margin-right: 6px;
+}
+
+.btn-success:active,
+.btn-success:hover,
+.btn-success:focus {
+  color: #fff;
+  background-color: #ca3f12;
+  border-color: #a93510;
+  outline: none;
+}
+
+.add-new-notice {
+  margin: 30px 0 50px;  
+}
+
+.notice {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+}
+
+.notice .message {
+  padding-bottom: 20px;
+}
+
+.notice .owner,
+.notice .date {
+  font-size: 13px;
+}
+
+.notice #editBulletinForm {
+  margin: 20px 0;
+}
+
+.notice a i {
+  margin: 0 5px;
+}
+
+.attendance-header {
+  margin-bottom: 50px;
 }

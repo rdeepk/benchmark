@@ -32,9 +32,16 @@ class GradesList extends Component {
     }
     return (
       <div>
-      <select value = {this.state.selectedGrade} onChange={this.handleGrades}>
-      <option value="Select Grade">Select Grade</option>
-      {gradesSelectJSX}</select>
+      <div className="row attendance-header">
+        <div className="col-sm-8">
+        <h1>Attendance</h1>
+        </div>
+        <div className="col-sm-4">
+          <select class="custom-select pull-right" id="inlineFormCustomSelect" value = {this.state.selectedGrade} onChange={this.handleGrades}>
+          <option value="Select Grade">Select Grade</option>
+          {gradesSelectJSX}</select>
+        </div>
+      </div>
       {gradeJSX}
       </div>
    );

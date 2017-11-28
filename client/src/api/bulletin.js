@@ -11,7 +11,7 @@ let _addBulletinToLocalStorage = (data) => {
     bulletins.messages.push(data)
     let newData = {
         writeAccess: bulletins.writeAccess,
-        messages: bulletins
+        messages: bulletins.messages
     }
     localStorage.setItem(BULLETINS, JSON.stringify(newData));
 }

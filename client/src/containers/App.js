@@ -118,11 +118,12 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <div className="container">
         <div className="row">
-          <div className="col-sm-4">
-            <Sidebar setActiveLink={this.setActiveLink} setGradesState={this.setGradesState} />
+          <div className="col-md-2">
+            <Sidebar setGradesState={this.setGradesState} />
           </div>
-          <div className="col-sm-8">
+          <div className="col-md-10">
             <Content  activeLink ={this.state.activeLink}
                       bulletin={this.state.bulletin}
                       setBulletinState={this.setBulletinState}
@@ -132,7 +133,7 @@ class App extends Component {
         </div>
         <Route path="/callback" exact render={(props) => (<Callback />
                 )} />
-
+      </div>
       </div>
     );
   }

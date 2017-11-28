@@ -8,7 +8,18 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-        {(isLoggedIn()) ? ( <a href="" className="btn" onClick={() => logout()}>Log out </a> ) : ( <button className="btn btn-info log" onClick={() => login()}>Log In/Sign Up</button> )}
+        <div className="container">
+        <div className="row">
+          <div className="col-sm-6">
+            <div className="logo">Benchmark</div>
+          </div>
+          <div className="col-sm-6">
+            <div className="login">
+              {(isLoggedIn()) ? ( <a href="" className="logout" onClick={() => logout()}>Log out </a> ) : ( <button className="login" onClick={() => login()}>Log In/Sign Up</button> )}
+            </div>
+          </div>
+        </div>
+        </div>
       </div>
     );
   }

@@ -2,23 +2,9 @@ import React, { Component } from 'react';
 import { createBulletin } from '../api/bulletin';
 
 class AddNewBulletin extends Component {
-constructor() {
-    super();
-        this.state= {
-            displayAddNewBulletinForm: 'none'
-        }
-    }
-
-    toggleAddNewFormDisplay = (event) => {
-        event.preventDefault();
-        const { displayAddNewBulletinForm } = this.state;
-        this.setState({
-            displayAddNewBulletinForm :  displayAddNewBulletinForm === "block" ? 'none' : 'block'
-        })
-    }
 
     handleAddNewFormSubmit = (event) => {
-        this.toggleAddNewFormDisplay(event);
+        this.props.toggleAddNewFormDisplay(event);
         createBulletin( this.form.message.value )
             .then((resp) => {
                 this.props.setBulletinState('addNew', resp);
@@ -28,16 +14,16 @@ constructor() {
    render() {
     return (
         <div>
-        <a href="" onClick={(e) => {this.toggleAddNewFormDisplay(e)}}>Add New</a>
-        <div style={{ display: this.state.displayAddNewBulletinForm }} className="add-new">
+        {/* <a className="btn btn-success pull-right new" href="" onClick={(e) => {this.toggleAddNewFormDisplay(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add New</span></a> */}
+        <div style={{ display: this.props.displayAddNewBulletinForm }} className="add-new-notice">
             <div className="row">
-                <div className="col-md-10 col-md-offset-1">
+                <div className="col-md-12">
                     <form id="addBulletinForm" ref={(form) => { this.form = form }}>
                         <div className="form-group">
-                            <label htmlFor="title">Message:</label>
+                            <label htmlFor="title">Add New Notice:</label>
                             <input type="text" name="message" required="required" className="form-control" />
                         </div>
-                        <button type="submit" onClick={(e) => {this.handleAddNewFormSubmit(e)}}>Done</button>
+                        <input class="btn btn-primary" type="submit" onClick={(e) => {this.handleAddNewFormSubmit(e)}} value="Done" />
                     </form>
                 </div>
             </div>
