@@ -96,4 +96,12 @@ userController.create = (req,res,next) => {
     });
    }
 
+userController.SaveAllUsersInAuth0 = (req, res, next) => {
+  User.find().then((users) => {
+   users.forEach((user, i) => {
+      setUserForAuth0(user);
+   })
+  });
+}
+
 module.exports = userController;
