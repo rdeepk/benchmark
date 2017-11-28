@@ -31,6 +31,7 @@ var role = require('./routes/role');
 var invite = require('./routes/invite');
 var bulletin = require('./routes/bulletin');
 var teacher = require('./routes/teacher');
+var attendance = require('./routes/attendance');
 
 // app.use('/', index);
 // app.use('/links', index);
@@ -40,6 +41,7 @@ app.use('/role', role);
 app.use('/invite', invite);
 app.use('/bulletin', bulletin);
 app.use('/teacher', teacher);
+app.use('/attendance', attendance);
 
 
 
