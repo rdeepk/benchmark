@@ -42,16 +42,21 @@ attendanceController.getAttendanceForToday = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
   if(role === 'admin' || role === 'teacher') {
-    Attendance.find({date: _getCurrentDate()}).then((data) => {
-      console.log(data);
-      res.send(data);
-    }, (e) => {
-      console.log(e);
-      res.status(400).send(e);
-    });
-  } else {
-    res.status(401)
-  }
+    // Attendance.find({date: _getCurrentDate()}).then((data) => {
+      Attendance.find({owner: decoded.bench_user_metadata.id})
+      .populate('owner')
+      .populate('present')
+      .populate('absent')
+      .exec(function (err, results) {
+           console.log(results);
+           res.json(results);
+      }, (e) => {
+        console.log(e);
+        res.status(400).send(e);
+      });
+      
+      
+    }
 }
 
   module.exports = attendanceController;

@@ -15,7 +15,7 @@ class Content extends Component {
                           setBulletinState={this.props.setBulletinState}
                 /> )} />
         {/* <Route path="/teachers" exact onEnter={requireAuth} render={(props) => (<Teachers bulletin={this.props.teachers}  /> )} /> */}
-        <Route path="/grades" exact onEnter={requireAuth} render={(props) => (<GradesList grades={this.props.grades}  /> )} />
+        <Route path="/attendance" exact onEnter={requireAuth} render={(props) => (<GradesList grades={this.props.grades}  /> )} />
       </div>
     );
   }

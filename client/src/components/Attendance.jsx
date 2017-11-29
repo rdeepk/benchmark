@@ -3,11 +3,31 @@ import React, { Component } from 'react';
 
 class Attendance extends Component {
   render() {
-//     let contentJSX = this.props.attendance.messages.map((item, i) => {
-//       return <div className="message">{item.message}</div>
-//     })
+    console.log("in attend:   ",this.props.attendance);
+    const {attendance} = this.props;
+    let jsx;
+    if(attendance) {
+      let presentJSX = attendance.present.map((item, i) => {
+        return <div>Name: {item.name}</div>
+      })
+
+      let absentJSX = attendance.absent.map((item, i) => {
+        return <div>Name: {item.name}</div>
+      })
+
+      jsx = <div>
+              <div>Date: {attendance.date}</div>
+              <div>Subject: {attendance.subject}</div>
+              <div>Time: {attendance.timeFrom} - {attendance.timeTo}</div>
+              <div>Grade: {attendance.grade}</div>
+              <div>Students Present: {presentJSX}</div>
+              <div>Students Absent: {absentJSX}</div>
+            </div>
+    }
+  
     return (
-      <div></div>
+      <div>{jsx}
+      </div>
    );
   }
 }

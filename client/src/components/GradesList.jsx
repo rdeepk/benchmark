@@ -6,7 +6,8 @@ class GradesList extends Component {
   constructor() {
     super();
     this.state = {
-      selectedGrade : 'Select Grade'
+      selectedGrade : 'Select Grade',
+      attendance: []
     }
   }
 
@@ -16,14 +17,33 @@ class GradesList extends Component {
     })
   }
 
-  componentWillMount() {
+
+  setAttendance = () => {
     getAttendance()
-      .then((data) => {
-        
+    .then((data) => {
+      console.log("attenfew:  ", data)
+      this.setState({
+        attendance: data
       })
+    })
+  }
+
+  componentWillMount() {
+    this.setAttendance();
   }
 
   render() {
+    let gradeAttendance;
+    if(this.state.attendance) {
+      if(this.state.selectedGrade === 'Select Grade') {
+        <h2>Please select a Grade</h2>
+      } else {
+        gradeAttendance = this.state.attendance.filter((item, i) => {
+          return item.grade === this.state.selectedGrade;
+        })
+      }
+    }
+
     let gradesSelectJSX;
     let gradeJSX;
     if(this.props.grades) {
@@ -31,14 +51,13 @@ class GradesList extends Component {
         return <option value={grade._id}>Grade {grade.name}</option>
       })
 
-
       this.props.grades.forEach((grade, i) => {
         if (grade._id === this.state.selectedGrade) {
-          gradeJSX = <Grade grade={grade} />
+          gradeJSX = <Grade grade={grade} attendance={gradeAttendance} />
         }
       });
-
     }
+
     return (
       <div>
       <div className="row content attendance-header">

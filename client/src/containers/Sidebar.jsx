@@ -31,7 +31,7 @@ class Sidebar extends Component {
       <div className="sidebar">
         <ul>
           <li><Link to="/bulletin"><i class="fa fa-fw fa-bell" aria-hidden="true"></i><span>Notice Board</span></Link></li>
-          {isLoggedIn() && this.state.role === 'teacher' && <li><Link to="/grades"><i class="fa fa-fw fa-signal" aria-hidden="true"></i><span>Attendance</span></Link></li>}
+          {isLoggedIn() && this.state.role === 'teacher' && <li><Link to="/attendance"><i class="fa fa-fw fa-signal" aria-hidden="true"></i><span>Attendance</span></Link></li>}
         </ul>
       </div>
     );
