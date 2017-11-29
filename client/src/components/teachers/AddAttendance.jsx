@@ -7,6 +7,7 @@ class AddAttendance extends Component {
     e.preventDefault();
     console.log(e.target);
     createAttendance(this.form.id, e.target);
+    this.form.reset();
   }
 
   render() {

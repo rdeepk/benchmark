@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { updateBulletin, deleteBulletin } from '../../api/bulletin';
 import { isLoggedIn } from '../../utils/AuthService';
+import moment from 'moment';
 
 class Bulletin extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class Bulletin extends Component {
         event.preventDefault();
         deleteBulletin(event.target.id)
                 .then((resp) => {
-                  console.log(resp);
+                  console.log("deleted:  ",resp);
                   this.props.setBulletinState('delete', {id: resp.message._id});
                 })
       }
@@ -45,8 +46,13 @@ class Bulletin extends Component {
           })
     }
 
+    getFormattedDate = (date) => {
+        return  moment(date).format('YYYY-MM-DD')
+    }
+
    render() {
     const { bulletin } = this.props;
+
     return (
         <div className="notice">
             {(this.props.role === 'teacher' || this.props.role === 'admin') ?
@@ -54,7 +60,7 @@ class Bulletin extends Component {
                     <div className="row">
                         <div className="col-md-9 col-lg-10">
                             <div className="message">{bulletin.message}</div>
-                            <div className="posted-by">Posted by {bulletin.owner.name} on {bulletin.created_at}</div>
+                            <div className="posted-by">Posted by {bulletin.owner.name} on {this.getFormattedDate(bulletin.created_at)}</div>
                         </div>
                         <div className="col-md-3 col-lg-2 text-right">
                             <a href="" id={bulletin._id} onClick={(e) => {this.toggleEditFormDisplay(e)}} ><i class="fa fa-pencil" aria-hidden="true"></i></a>

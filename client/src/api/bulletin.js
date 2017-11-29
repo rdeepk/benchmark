@@ -17,10 +17,9 @@ let _addBulletinToLocalStorage = (data) => {
 }
 
 let _updateBulletinInLocalStorage = (data) => {
-    console.log(data);
     let bulletins = JSON.parse(localStorage.getItem(BULLETINS));
     let newMessages = bulletins.messages.map((message, key) => {
-        if(message._id === data.id) {
+        if(message._id === data._id) {
           message.message = data.message;
         }
         return  message;
@@ -100,7 +99,7 @@ export function deleteBulletin(id) {
                     }
             })
             .then((response) => {
-                _deleteBulletinLocalStorage(response.data);
+                _deleteBulletinLocalStorage(response.data.message._id);
                 console.log("api:  ", response);
                 resolve(response.data);
             })

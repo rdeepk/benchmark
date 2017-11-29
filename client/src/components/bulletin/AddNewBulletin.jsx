@@ -9,12 +9,12 @@ class AddNewBulletin extends Component {
             .then((resp) => {
                 this.props.setBulletinState('addNew', resp);
             })
+        this.form.reset();
     }
 
    render() {
     return (
         <div>
-        {/* <a className="btn btn-success pull-right new" href="" onClick={(e) => {this.toggleAddNewFormDisplay(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add New</span></a> */}
         <div style={{ display: this.props.displayAddNewBulletinForm, height: this.props.heightAddNewBulletinForm}} className="add-new-notice">
             <div className="row">
                 <div className="col-md-12">
