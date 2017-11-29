@@ -42,13 +42,14 @@ attendanceController.getAttendanceForToday = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
   if(role === 'admin' || role === 'teacher') {
-    // Attendance.find({date: _getCurrentDate()}).then((data) => {
+
       Attendance.find({owner: decoded.bench_user_metadata.id})
       .populate('owner')
+      .populate('grade')
       .populate('present')
       .populate('absent')
       .exec(function (err, results) {
-           console.log(results);
+           console.log("Attendance:   ",results);
            res.json(results);
       }, (e) => {
         console.log(e);

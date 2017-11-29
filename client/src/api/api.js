@@ -13,7 +13,6 @@ export function getLinks() {
                                     }
                                 })
             .then((response) => {
-                console.log(response);
                 resolve(response.data);
             })
             .catch((error) => {
@@ -31,7 +30,6 @@ export function getGrades(endPoint) {
                                     }
                                 })
             .then((response) => {
-                console.log(response);
                 resolve(response.data);
             })
             .catch((error) => {

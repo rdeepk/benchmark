@@ -22,7 +22,6 @@ class GradesList extends Component {
   setAttendance = () => {
     getAttendance()
     .then((data) => {
-      console.log("attenfew:  ", data)
       this.setState({
         attendance: data
       })
@@ -43,16 +42,17 @@ class GradesList extends Component {
 
   render() {
     let gradeAttendance;
+    let messageText;
+
     if(this.state.attendance) {
       if(this.state.selectedGrade === 'Select Grade') {
-        <h2>Please select a Grade</h2>
+        messageText = <p className="highlight">Please select a Grade to View or add attendance.</p>
       } else {
         gradeAttendance = this.state.attendance.filter((item, i) => {
-          return item.grade === this.state.selectedGrade;
+          return item.grade._id === this.state.selectedGrade;
         })
       }
     }
-
     let gradesSelectJSX;
     let gradeJSX;
     if(this.props.grades) {
@@ -82,6 +82,7 @@ class GradesList extends Component {
           <a href="" className="btn btn-primary" onClick={(e) => {this.toggleAttendanceFormDisplay(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add Attendance</span></a>
         </div>
       </div>
+      {messageText}
       {gradeJSX}
       </div>
    );

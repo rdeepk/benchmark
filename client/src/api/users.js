@@ -13,7 +13,6 @@ export function getUserById(id) {
                             }
                         })
             .then((response) => {
-                // console.log('user api:  ',response);
                 resolve(response.data);
             })
             .catch((error) => {

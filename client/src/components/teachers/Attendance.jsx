@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class Attendance extends Component {
+  
+  getFormattedDate = (date) => {
+    return  moment(date).format('YYYY-MM-DD')
+  }
+
   render() {
-    console.log("in attend:   ",this.props.attendance);
     const {attendance} = this.props;
     let jsx;
     if(attendance) {
@@ -18,13 +23,13 @@ class Attendance extends Component {
               <div className="row title">
                 <div className="col-sm-4">
                   <div style={{display: 'none'}}>Time: {attendance.timeFrom} - {attendance.timeTo}</div>
-                  <div>Date: {attendance.date}</div>
+                  <div>Date: {this.getFormattedDate(attendance.date)}</div>
                 </div>
                 <div className="col-sm-4">
                   <div>Subject: {attendance.subject}</div>
                 </div>
                 <div className="col-sm-4">
-                <div>Grade: {attendance.grade}</div>
+                <div>Grade: {attendance.grade.name}</div>
                 </div>
               </div>
               <div className="row">

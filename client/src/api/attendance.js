@@ -7,8 +7,6 @@ const ID_TOKEN_KEY = getIdToken();
 
 
 export function getAttendance() {
-    console.log(ACCESS_TOKEN_KEY);
-    console.log(ID_TOKEN_KEY);
     return new Promise((resolve, reject) => {
         axios.get(`${baseUrl}/attendance/get`,  { headers: { 
                         Authorization: `Bearer ${ACCESS_TOKEN_KEY}`,
@@ -25,8 +23,6 @@ export function getAttendance() {
 }
 
 export function getAttendanceForStudent() {
-    console.log(ACCESS_TOKEN_KEY);
-    console.log(ID_TOKEN_KEY);
     return new Promise((resolve, reject) => {
         axios.get(`${baseUrl}/attendance/student`,  { headers: { 
                         Authorization: `Bearer ${ACCESS_TOKEN_KEY}`,
@@ -58,7 +54,6 @@ export function createAttendance(gradeId, data) {
         absent: absent
     }
 
-    console.log(newAttendance);
     return new Promise((resolve, reject) => {
         axios.post(`${baseUrl}/attendance/create`, newAttendance,
             { headers: { 
@@ -67,7 +62,6 @@ export function createAttendance(gradeId, data) {
                     }
             })
             .then((response) => {
-             console.log(response);
                 resolve(response.data);
             })
             .catch((error) => {

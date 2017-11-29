@@ -70,7 +70,6 @@ export function getBulletin() {
 }
 
 export function updateBulletin(doc) {
-    console.log(doc);
     return new Promise((resolve, reject) => {
         axios.post(`${baseUrl}/bulletin/update?id=${doc._id}`, doc,
             { headers: { 
@@ -90,7 +89,6 @@ export function updateBulletin(doc) {
 }
 
 export function deleteBulletin(id) {
-    console.log(id);
     return new Promise((resolve, reject) => {
         axios.delete(`${baseUrl}/bulletin/delete?id=${id}`, 
             { headers: { 
@@ -100,7 +98,6 @@ export function deleteBulletin(id) {
             })
             .then((response) => {
                 _deleteBulletinLocalStorage(response.data.message._id);
-                console.log("api:  ", response);
                 resolve(response.data);
             })
             .catch((error) => {

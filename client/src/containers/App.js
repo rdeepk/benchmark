@@ -99,8 +99,6 @@ class App extends Component {
 
     this.setState({
       bulletin: newState
-    },()=>{
-      console.log(this.state.bulletin)
     })
    }
 
@@ -121,7 +119,6 @@ class App extends Component {
    }
 
   render() {
-    console.log(this.state.isLoggedIn);
 
     if(!this.state.isLoggedIn) {
       return (

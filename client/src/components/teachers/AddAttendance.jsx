@@ -5,7 +5,6 @@ class AddAttendance extends Component {
 
   handleAttendanceSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
     createAttendance(this.form.id, e.target);
     this.form.reset();
   }

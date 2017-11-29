@@ -31,11 +31,10 @@ class StudentsList extends Component {
   }
 
   render() {
-      console.log(this.state.date.format('YYYY-MM-DD'));
       let attendanceData = this.props.attendance.filter((item, i) => {
         return this._isDateSame(item.date, this.state.date);
       })
-      console.log(attendanceData);
+
       let attendanceJSX;
       if(attendanceData) {
           attendanceJSX = attendanceData.map((item, i) => {

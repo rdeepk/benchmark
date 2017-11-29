@@ -274,3 +274,7 @@ input.form-control {
 .add-attendance {
   margin-bottom: 50px;
 }
+
+.highlight {
+  color: red;
+}

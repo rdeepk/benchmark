@@ -24,7 +24,6 @@ class Bulletin extends Component {
         event.preventDefault();
         deleteBulletin(event.target.id)
                 .then((resp) => {
-                  console.log("deleted:  ",resp);
                   this.props.setBulletinState('delete', {id: resp.message._id});
                 })
       }
@@ -41,7 +40,6 @@ class Bulletin extends Component {
         this.toggleEditFormDisplay(event);
         updateBulletin(this.state.bulletin)
         .then((resp) => {
-            console.log(resp);
             this.props.setBulletinState('update', {id: resp._id, message:resp.message});
           })
     }
