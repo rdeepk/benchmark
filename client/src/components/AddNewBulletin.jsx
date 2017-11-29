@@ -15,7 +15,7 @@ class AddNewBulletin extends Component {
     return (
         <div>
         {/* <a className="btn btn-success pull-right new" href="" onClick={(e) => {this.toggleAddNewFormDisplay(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add New</span></a> */}
-        <div style={{ display: this.props.displayAddNewBulletinForm }} className="add-new-notice">
+        <div style={{ display: this.props.displayAddNewBulletinForm, height: this.props.heightAddNewBulletinForm}} className="add-new-notice">
             <div className="row">
                 <div className="col-md-12">
                     <form id="addBulletinForm" ref={(form) => { this.form = form }}>

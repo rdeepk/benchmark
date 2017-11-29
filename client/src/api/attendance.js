@@ -7,26 +7,21 @@ const ID_TOKEN_KEY = getIdToken();
 
 
 export function getAttendance() {
-    // console.log(ACCESS_TOKEN_KEY);
-    // console.log(ID_TOKEN_KEY);
-    // let bulletins = localStorage.getItem(BULLETINS);
-    // return new Promise((resolve, reject) => {
-    //     if(bulletins) {
-    //        resolve(JSON.parse(bulletins));
-    //     }
-    //     axios.get(`${baseUrl}/bulletin/messages`,  { headers: { 
-    //                     Authorization: `Bearer ${ACCESS_TOKEN_KEY}`,
-    //                     id_token: ID_TOKEN_KEY
-    //                         }
-    //                     })
-    //         .then((response) => {
-    //             localStorage.setItem(BULLETINS, JSON.stringify(response.data));
-    //             resolve(response.data);
-    //         })
-    //         .catch((error) => {
-    //             reject(error);
-    //         });
-    //   })
+    console.log(ACCESS_TOKEN_KEY);
+    console.log(ID_TOKEN_KEY);
+    return new Promise((resolve, reject) => {
+        axios.get(`${baseUrl}/attendance/get`,  { headers: { 
+                        Authorization: `Bearer ${ACCESS_TOKEN_KEY}`,
+                        id_token: ID_TOKEN_KEY
+                            }
+                        })
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+      })
 }
 
 export function createAttendance(gradeId, data) {
@@ -36,7 +31,7 @@ export function createAttendance(gradeId, data) {
     }
 
     let newAttendance = {
-        date: data.date.value,
+        date: new Date(data.date.value).toISOString(),
         subject: data.subject.value,
         timeFrom: new Date(data.date.value + ' ' + data.hoursFrom.value).toISOString(),
         timeTo: new Date(data.date.value + ' ' + data.hoursTo.value).toISOString(),

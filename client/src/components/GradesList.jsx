@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import { Route } from 'react-router-dom';
 import Grade from './Grade';
+import {getAttendance} from '../api/attendance';
 
 class GradesList extends Component {
   constructor() {
@@ -9,11 +9,20 @@ class GradesList extends Component {
       selectedGrade : 'Select Grade'
     }
   }
+
   handleGrades = (e) => {
     this.setState({
       selectedGrade: e.target.value
     })
   }
+
+  componentWillMount() {
+    getAttendance()
+      .then((data) => {
+        
+      })
+  }
+
   render() {
     let gradesSelectJSX;
     let gradeJSX;
@@ -32,7 +41,7 @@ class GradesList extends Component {
     }
     return (
       <div>
-      <div className="row attendance-header">
+      <div className="row content attendance-header">
         <div className="col-sm-8">
         <h1>Attendance</h1>
         </div>

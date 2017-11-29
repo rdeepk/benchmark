@@ -4,19 +4,47 @@ var jwtDecode = require('jwt-decode');
 
 var attendanceController = {};
 
+_getCurrentDate = () => {
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  
+  if(dd<10) {
+      dd = '0'+dd
+  } 
+  
+  if(mm<10) {
+      mm = '0'+mm
+  } 
+  return yyyy + '-' + mm + '-' + dd;
+}
+
 attendanceController.create = (req, res, next) => {
-  console.log(":create attendance");
-  // console.log(req.body);
   let decoded = jwtDecode(req.headers.id_token);
-  console.log(decoded.bench_user_metadata.id)
   let role = decoded.bench_app_metadata.role;
   if(role === 'admin' || role === 'teacher') {
     let attendance = req.body;
     attendance.owner = decoded.bench_user_metadata.id;
-    console.log(attendance);
     var newAttendance = new Attendance(attendance);
     newAttendance.save().then((doc) => {
       res.send(doc);
+    }, (e) => {
+      console.log(e);
+      res.status(400).send(e);
+    });
+  } else {
+    res.status(401)
+  }
+}
+
+attendanceController.getAttendanceForToday = (req, res, next) => {
+  let decoded = jwtDecode(req.headers.id_token);
+  let role = decoded.bench_app_metadata.role;
+  if(role === 'admin' || role === 'teacher') {
+    Attendance.find({date: _getCurrentDate()}).then((data) => {
+      console.log(data);
+      res.send(data);
     }, (e) => {
       console.log(e);
       res.status(400).send(e);

@@ -2,35 +2,76 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 1.6;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif;
 }
 
 a {
   color: #333;
+  transition: all 0.3s ease-in-out;
 }
 
 a:hover {
-  color: #333;
+  color: #eb5424;
   text-decoration: none;
+}
+
+.App {
+  width: 90%;
+  margin: 0 auto;
 }
 
 .header {
   background: transparent;
-  font-size: 14px;
-  padding: 20px 0;
-  border-bottom: 1px solid #f1f1f1;
+  /* font-size: 14px; */
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
   margin-bottom: 30px;
+}
+
+.header .row {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: 900;
 }
 
 .login {
   text-align: right;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+.btn-link {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  color: #e14615;
+  text-decoration: none;
 }
 
 .sidebar ul {
-  margin: 0;
-  padding: 0;
-  line-height: 1.4;
-  padding-left: 2px;
+  margin: 15px 0 0;
+  padding: 0 0 0 2px;
+  /* line-height: 1.4; */
+  /* padding-left: 2px; */
   color: #5d676f;
 }
 
@@ -47,25 +88,29 @@ a:hover {
 
 .sidebar a {
   color: rgba(0,0,0,0.86);
-  letter-spacing: .3px;
-  font-size: 13px;
+  /* letter-spacing: .3px; */
+  font-size: 17px;
 }
 
-.sidebar a i {
-  position: relative;
+.sidebar .fa {
+  /* position: relative; */
   /* top: 4px; */
-  font-size: 13px;
-  margin-right: 4px;
-  width: 17px;
-  display: inline-block;
+  /* font-size: 13px; */
+  margin-right: 10px;
+  /* width: 17px; */
+  /* display: inline-block; */
 }
+
 
 .content h1 {
-  display: inline-block;
+  /* display: inline-block;
   font-weight: 400;
   min-height: 60px;
   min-width: 1px;
-  vertical-align: bottom;
+  vertical-align: bottom; */
+  font-size: 24px;
+  line-height: 55px;
+  font-weight: 900;
 }
 
 .content .btn.btn-success, .content-header .btn-default.new {
@@ -73,17 +118,16 @@ a:hover {
 }
 
 .btn, a.btn {
-  font-size: 13px;
+  /* font-size: 13px; */
   text-transform: uppercase;
 }
 
 .btn {
   letter-spacing: .08em;
-}
-
-.btn {
   overflow: hidden;
   position: relative;
+  cursor: pointer;
+  padding: 12px 20px;
 }
 
 .btn-success   {
@@ -93,7 +137,7 @@ a:hover {
 }
 
 .btn i, a.btn i {
-  font-size: 13px;
+  /* font-size: 13px; */
   position: relative;
   top: 2px;
   margin-right: 6px;
@@ -109,30 +153,62 @@ a:hover {
 }
 
 .add-new-notice {
-  margin: 30px 0 50px;  
+  margin: 30px 0;  
+  transition: all 0.3s ease-in-out;
+}
+
+input.form-control {
+  padding: 0.9rem 0.75rem;
+}
+
+.sub-header div:nth-child(2) {
+  text-align: right;
+}
+
+@media (max-width: 767px) {
+  .sub-header,
+  .sub-header div:nth-child(2) {
+    text-align: center;
+  }
+  .sub-header div:nth-child(2) {
+    margin-bottom: 15px;
+  }
 }
 
 .notice {
-  border-top: 1px solid #ddd;
+  /* border-top: 1px solid #ddd; */
   border-bottom: 1px solid #ddd;
-  padding: 20px 0;
+  padding: 15px 0;
+}
+
+.notice:first-child {
+  border-top: 1px solid #ddd;
 }
 
 .notice .message {
-  padding-bottom: 20px;
+  font-size: 1rem;
+  margin-bottom: 2px;
 }
 
-.notice .owner,
-.notice .date {
-  font-size: 13px;
+.notice .posted-by {
+  font-size: 0.95em;
+  color: rgba(51,51,51, 0.7);
 }
 
 .notice #editBulletinForm {
   margin: 20px 0;
 }
 
-.notice a i {
-  margin: 0 5px;
+.notice a {
+  font-size: 1.2em;
+  margin: 0 20px 0 0;
+  color: rgba(51,51,51, 0.7);
+  transition: all 0.3s ease-in-out;
+}
+
+.notice a:hover,
+.notice a:focus {
+  color: rgba(51,51,51, 1);
 }
 
 .attendance-header {

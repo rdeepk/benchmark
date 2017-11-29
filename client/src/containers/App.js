@@ -118,12 +118,12 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <div className="container">
+        <div className="container-fluid">
         <div className="row">
-          <div className="col-md-2">
+          <div className="col-md-3 col-xl-2">
             <Sidebar setGradesState={this.setGradesState} />
           </div>
-          <div className="col-md-10">
+          <div className="col-md-9 col-xl-10">
             <Content  activeLink ={this.state.activeLink}
                       bulletin={this.state.bulletin}
                       setBulletinState={this.setBulletinState}

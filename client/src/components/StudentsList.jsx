@@ -1,62 +1,31 @@
 import React, { Component } from 'react';
 import {createAttendance} from '../api/attendance';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+import AddAttendance from './AddAttendance';
 
 class StudentsList extends Component {
+    constructor() {
+        super();
+        this.state = {
+            date: moment()
+        }
+    }
 
-  handleAttendanceSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target);
-    createAttendance(this.form.id, e.target);
+  onDateChange = (date) => {
+    this.setState({ date });
   }
 
-
   render() {
-    let studentJSX;
-    if(this.props.students) {
-      studentJSX = this.props.students.map((student, i) => {
-        return <div className="form-group col-md-6">
-          <label htmlFor={student._id}>{student.name}</label>
-          <select class="custom-select form-control" name={'attendance'+i} id={student._id} onChange={this.handleAttendance}>
-          <option value={true}>P</option>
-          <option value={false}>A</option>
-          </select>
-        </div>
-      })
-    }
+      console.log(this.state.date.format('YYYY-MM-DD'));
     return (
       <div className="add-attendance">
-                <section> 	
-                <div className="row">
-                    <div className="col-md-12">
-                        <form id={this.props.gradeId}  ref={(form) => { this.form = form }}
-                                                onSubmit={(e) => { this.handleAttendanceSubmit(e) }}>
-                        <div className="form-row">
-                            <div className="form-group col-md-12">
-                                <label htmlFor="date">Date:</label>
-                                <input type="date" name="date" required="required" className="form-control" />
-                            </div>
-                            <div className="form-group col-md-12">
-                                <label htmlFor="subject">Subject:</label>
-                                <input type="text" name="subject" required="required" className="form-control"/>
-                            </div>
-                            <input type="hidden" name="studentCount" value={this.props.students.length} required="required" className="form-control"/>
-                            <div className="form-group col-md-6">
-                                <label htmlFor="hoursFrom">Time To:</label>
-                                <input type="time" name="hoursTo" required="required" className="form-control"/>
-                            </div>
-                            <div className="form-group col-md-6">
-                                <label htmlFor="hoursFrom">Time From:</label>
-                                <input type="time" name="hoursFrom" required="required" className="form-control"/>
-                            </div>
-                            {studentJSX}
-                            <div className="form-group col-md-12">
-                                <input class="btn btn-primary" type="submit" value="Done" />
-                            </div>
-                        </div>  
-                        </form>
-                    </div>
-                </div>                        
-            </section>
+      <DatePicker   selected={this.state.date}
+                    onChange={this.onDateChange}
+                    dateFormat="YYYY-MM-DD"
+                />
+        <AddAttendance students={this.props.students} gradeId={this.props.gradeId}/>
         </div>
    );
   }

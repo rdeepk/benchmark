@@ -31,12 +31,12 @@ class BulletinList extends Component {
     }
     return (
       <div className="content">
-          <div className="row">
-            <div className="col-sm-8">
+          <div className="row sub-header">
+            <div className="col-md-8">
               <h1>Notices</h1>
             </div>
-            <div className="col-sm-4">
-              <a className="btn btn-success pull-right new" href="" onClick={(e) => {this.toggleAddNewFormDisplay(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add New</span></a>
+            <div className="col-md-4">
+              <a className="btn btn-primary" href="" onClick={(e) => {this.toggleAddNewFormDisplay(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add New</span></a>
             </div>
           </div>
           <div className="row">
@@ -46,10 +46,8 @@ class BulletinList extends Component {
                                                       toggleAddNewFormDisplay={this.toggleAddNewFormDisplay} />}
             </div>
           </div>
-          <div className="row">
-            <div className="col-sm-12">
+          <div>
             {contentJSX}
-            </div>
           </div>          
       </div>
    );

@@ -30,8 +30,8 @@ class Sidebar extends Component {
     return (
       <div className="sidebar">
         <ul>
-          <li><Link to="/bulletin"><i class="fa fa-bell" aria-hidden="true"></i><span>Notice Board</span></Link></li>
-          {isLoggedIn() && this.state.role === 'teacher' && <Link to="/grades"><i class="fa fa-signal" aria-hidden="true"></i><span>Attendance</span></Link>}
+          <li><Link to="/bulletin"><i class="fa fa-fw fa-bell" aria-hidden="true"></i><span>Notice Board</span></Link></li>
+          {isLoggedIn() && this.state.role === 'teacher' && <li><Link to="/grades"><i class="fa fa-fw fa-signal" aria-hidden="true"></i><span>Attendance</span></Link></li>}
         </ul>
       </div>
     );
