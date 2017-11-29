@@ -72,7 +72,6 @@ export function setAccessToken() {
 
 // Get and store id_token in local storage
 export function setIdToken() {
-  console.log("setimg token")
   let idToken = getParameterByName('id_token');
   localStorage.setItem(ID_TOKEN_KEY, idToken);
 }
@@ -82,8 +81,10 @@ export function isLoggedIn() {
   return !!idToken && !isTokenExpired(idToken);
 }
 
-export function setRole(role) {
-  localStorage.setItem(ROLE, role);
+export function setRole() {
+  let id_token = getIdToken()
+  const token = decode(id_token);
+  localStorage.setItem(ROLE, token.bench_app_metadata.role);
 }
 
 export function getRole() {

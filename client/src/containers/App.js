@@ -4,7 +4,7 @@ import Header from './Header';
 import Callback from '../components/Callback';
 import Sidebar from './Sidebar';
 import Content from './Content';
-import { requireAuth, getAccessToken, isLoggedIn, login } from '../utils/AuthService';
+import { isLoggedIn, login, getRole} from '../utils/AuthService';
 import {getBulletin} from '../api/bulletin';
 import axios from 'axios';
 import Public from '../components/Public';
@@ -19,12 +19,11 @@ class App extends Component {
       loading: false,
       grades:'',
       isLoggedIn: isLoggedIn(),
-      role:''
+      role: getRole()
     }
   }
 
   setLoginState = () => {
-    login();
     this.setState({
       isLoggedIn: isLoggedIn()
     })
@@ -127,9 +126,9 @@ class App extends Component {
     if(!this.state.isLoggedIn) {
       return (
         <div className="App">
-        <Route path="/callback" exact render={(props) => (<Callback />
+        <Route path="/callback" exact render={(props) => (<Callback setLoginState={this.setLoginState} />
                 )} />
-          <Public setLoginState={this.setLoginState} />
+          <Public />
         </div>
       )
     }

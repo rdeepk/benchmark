@@ -7,7 +7,7 @@ class Public extends Component {
         return (
             <div className="container-fluid public-login">
                 <div className="public-logo">BenchMark</div>
-                <button className="login btn btn-primary" onClick={() => this.props.setLoginState()}>Log In - Sign Up</button>
+                <button className="login btn btn-primary" onClick={() => login()}>Log In - Sign Up</button>
             </div>
         );
       }

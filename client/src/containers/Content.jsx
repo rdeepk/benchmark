@@ -22,7 +22,7 @@ class Content extends Component {
                                           <GradesList grades={this.props.grades}
                                                       role={this.props.role}
                                                       /> )} />
-        <Route path="/studentAttendance" exact onEnter={requireAuth} render={(props) => (<StudentAttendance role={this.state.role} /> )} />
+        <Route path="/studentAttendance" exact onEnter={requireAuth} render={(props) => (<StudentAttendance /> )} />
       </div>
     );
   }
