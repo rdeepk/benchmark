@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { createBulletin } from '../api/bulletin';
+import { createBulletin } from '../../api/bulletin';
 
 class AddNewBulletin extends Component {
 

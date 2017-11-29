@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {createAttendance} from '../api/attendance';
+import {createAttendance} from '../../api/attendance';
 
 class AddAttendance extends Component {
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { updateBulletin, deleteBulletin } from '../api/bulletin';
-import { isLoggedIn } from '../utils/AuthService';
+import { updateBulletin, deleteBulletin } from '../../api/bulletin';
+import { isLoggedIn } from '../../utils/AuthService';
 
 class Bulletin extends Component {
     constructor(props) {

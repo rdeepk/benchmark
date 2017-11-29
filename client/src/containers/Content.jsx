@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import BulletinList from '../components/BulletinList';
-import Teachers from './Teachers';
-import GradesList from '../components/GradesList';
+import BulletinList from '../components/bulletin/BulletinList';
+import GradesList from '../components/teachers/GradesList';
 import StudentAttendance from '../components/student/StudentAttendance';
 import { requireAuth,isLoggedIn } from '../utils/AuthService';
 import { Route, Link } from 'react-router-dom';

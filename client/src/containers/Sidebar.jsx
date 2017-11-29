@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Bulletin from '../components/Bulletin';
+import Bulletin from '../components/bulletin/Bulletin';
 import { Route, Link } from 'react-router-dom'
 import { requireAuth, isLoggedIn, setRole } from '../utils/AuthService';
 import {getLinks, getGrades} from '../api/api';

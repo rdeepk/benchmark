@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Grade from './Grade';
-import {getAttendance} from '../api/attendance';
+import {getAttendance} from '../../api/attendance';
 
 class GradesList extends Component {
   constructor() {
