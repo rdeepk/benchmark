@@ -8,7 +8,7 @@ const BULLETINS = 'bulletins';
 
 let _addBulletinToLocalStorage = (data) => {
     let bulletins = JSON.parse(localStorage.getItem(BULLETINS));
-    bulletins.messages.push(data)
+    bulletins.messages.unshift(data)
     let newData = {
         writeAccess: bulletins.writeAccess,
         messages: bulletins.messages

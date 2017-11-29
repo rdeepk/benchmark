@@ -13,7 +13,7 @@ class Content extends Component {
         {/* <Route exact path="/bulletin" component={Home}/> */}
 
 
-        <Route path="/bulletin" exact onEnter={requireAuth} render={(props) => (
+        <Route path="/" exact onEnter={requireAuth} render={(props) => (
               <BulletinList   bulletin={this.props.bulletin}
                           setBulletinState={this.props.setBulletinState}
                           role={this.props.role}

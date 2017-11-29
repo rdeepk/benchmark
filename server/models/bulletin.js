@@ -13,6 +13,10 @@ var Bulletin = mongoose.model('Bulletin', {
         type: Date,
         default: Date.now
     },
+    updated_at: {
+        type: Date,
+        default: Date.now
+    },
     expiry_date: {
         type: Date,
         expires: 0

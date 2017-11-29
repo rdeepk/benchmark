@@ -77,7 +77,7 @@ class App extends Component {
 
    addNewBulletin = (data) => {
     let { bulletin } = this.state;
-    bulletin.messages.push(data);
+    bulletin.messages.unshift(data);
     this.setState({
       bulletin: bulletin
     })

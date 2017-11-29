@@ -23,6 +23,7 @@ bulletinController.create = (req, res, next) => {
       message: req.body.message,
       owner: decoded.bench_user_metadata.id
     });
+
     newMessage.save().then((doc) => {
       Bulletin.populate(newMessage, {path:"owner"}, function(err, bulletin) {
         res.send(bulletin);
@@ -43,8 +44,10 @@ bulletinController.getMessages = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
   Bulletin.find()
+  .sort('-updated_at')
   .populate("owner")
   .exec(function(err,messages) {
+    console.log(messages);
     let response = {
       writeAccess:  _hasWriteAccess(role),
       messages: messages
@@ -62,7 +65,8 @@ bulletinController.update = (req, res, next) => {
   if(role === 'admin' || role === 'teacher') {
     var newMessage = {
       message: req.body.message,
-      owner: decoded.bench_user_metadata.id
+      owner: decoded.bench_user_metadata.id,
+      updated_at: new Date()
     };
 
     Bulletin.findOneAndUpdate({_id: req.query.id}, newMessage, {new: true}, function(err, doc){
