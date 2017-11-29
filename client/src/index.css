@@ -1,3 +1,10 @@
+html,
+body,
+#root,
+.App {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -36,7 +43,7 @@ a:hover {
   /* font-size: 14px; */
   padding: 15px 0;
   border-bottom: 1px solid #ddd;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .header .row {
@@ -44,9 +51,31 @@ a:hover {
   align-items: center;
 }
 
+.header + .container-fluid {
+  /* padding-top:  30px; */
+}
+
+.public-login {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.public-login .btn {
+  padding: 15px 30px;
+}
+
 .logo {
   font-size: 27px;
   font-weight: 900;
+}
+
+.public-logo {
+  font-size: 50px;
+  font-weight: 900;
+  margin-bottom: 20px;
 }
 
 .login {
@@ -100,7 +129,13 @@ a:hover {
   /* width: 17px; */
   /* display: inline-block; */
 }
-
+@media (min-width: 768px) {
+.bdr-left {
+  border-left: 1px solid #ddd;
+  padding-bottom: 40px;
+  padding-left: 30px;
+}
+}
 
 .content h1 {
   /* display: inline-block;
@@ -161,6 +196,11 @@ input.form-control {
   padding: 0.9rem 0.75rem;
 }
 
+.sidebar,
+.sub-header {
+  padding-top: 30px;
+}
+
 .sub-header div:nth-child(2) {
   text-align: right;
 }
@@ -212,5 +252,25 @@ input.form-control {
 }
 
 .attendance-header {
+  margin-bottom: 50px;
+}
+
+.react-datepicker-wrapper {
+  width: 50%;
+  margin-bottom: 50px;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+.attendance .title {
+  background: #eee;
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 50px;
+}
+
+.add-attendance {
   margin-bottom: 50px;
 }

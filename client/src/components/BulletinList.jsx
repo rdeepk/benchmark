@@ -26,6 +26,7 @@ class BulletinList extends Component {
         return <Bulletin bulletin={item}
                          writeAccess={ bulletin.writeAccess ? true : false}
                          setBulletinState={this.props.setBulletinState}
+                         role={this.props.role}
                 />
        })
     }
@@ -35,13 +36,13 @@ class BulletinList extends Component {
             <div className="col-md-8">
               <h1>Notices</h1>
             </div>
-            <div className="col-md-4">
+            { (this.props.role === 'teacher' || this.props.role === 'admin') && <div className="col-md-4">
               <a className="btn btn-primary" href="" onClick={(e) => {this.toggleAddNewFormDisplay(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add New</span></a>
-            </div>
+            </div>}
           </div>
           <div className="row">
             <div className="col-sm-12">
-              {bulletin.writeAccess && <AddNewBulletin setBulletinState={this.props.setBulletinState}
+              {(this.props.role === 'teacher' || this.props.role === 'admin') && <AddNewBulletin setBulletinState={this.props.setBulletinState}
                                                       displayAddNewBulletinForm={this.state.displayAddNewBulletinForm}
                                                       toggleAddNewFormDisplay={this.toggleAddNewFormDisplay} />}
             </div>

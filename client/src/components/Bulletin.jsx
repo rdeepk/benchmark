@@ -49,7 +49,7 @@ class Bulletin extends Component {
     const { bulletin } = this.props;
     return (
         <div className="notice">
-            {this.props.writeAccess ?
+            {(this.props.role === 'teacher' || this.props.role === 'admin') ?
                 <div>
                     <div className="row">
                         <div className="col-md-9 col-lg-10">
@@ -82,8 +82,7 @@ class Bulletin extends Component {
                 :  <div className="row">
                         <div className="col-sm-12">
                             <div className="message">{bulletin.message}</div>
-                            <div className="owner">By: {bulletin.owner.name}</div>
-                            <div className="date">Date: {bulletin.created_at}</div>
+                            <div className="posted-by">Posted by {bulletin.owner.name} on {bulletin.created_at}</div>
                         </div>
                     </div>}
         </div>

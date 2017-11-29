@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import auth0 from 'auth0-js';
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
+const ROLE = 'role';
 
 const CLIENT_ID = '9UEtyOoCazl0pohRwAja0DlV3hfPd6L2';
 const CLIENT_DOMAIN = 'bench.auth0.com';
@@ -27,6 +28,7 @@ export function login() {
 export function logout() {
   clearIdToken();
   clearAccessToken();
+  clearRole();
   // browserHistory.push('/');)
 }
 
@@ -52,6 +54,10 @@ function clearAccessToken() {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
 }
 
+function clearRole() {
+  localStorage.removeItem(ROLE);
+}
+
 // Helper function that will allow us to extract the access_token and id_token
 function getParameterByName(name) {
   let match = RegExp('[#&]' + name + '=([^&]*)').exec(window.location.hash);
@@ -66,6 +72,7 @@ export function setAccessToken() {
 
 // Get and store id_token in local storage
 export function setIdToken() {
+  console.log("setimg token")
   let idToken = getParameterByName('id_token');
   localStorage.setItem(ID_TOKEN_KEY, idToken);
 }
@@ -73,6 +80,14 @@ export function setIdToken() {
 export function isLoggedIn() {
   const idToken = getIdToken();
   return !!idToken && !isTokenExpired(idToken);
+}
+
+export function setRole(role) {
+  localStorage.setItem(ROLE, role);
+}
+
+export function getRole() {
+  return localStorage.getItem(ROLE);
 }
 
 function getTokenExpirationDate(encodedToken) {

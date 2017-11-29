@@ -24,6 +24,24 @@ export function getAttendance() {
       })
 }
 
+export function getAttendanceForStudent() {
+    console.log(ACCESS_TOKEN_KEY);
+    console.log(ID_TOKEN_KEY);
+    return new Promise((resolve, reject) => {
+        axios.get(`${baseUrl}/attendance/student`,  { headers: { 
+                        Authorization: `Bearer ${ACCESS_TOKEN_KEY}`,
+                        id_token: ID_TOKEN_KEY
+                            }
+                        })
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error);
+            });
+      })
+}
+
 export function createAttendance(gradeId, data) {
     let present = [], absent = [];
     for (let i = 0; i < data.studentCount.value; i++ ) {

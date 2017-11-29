@@ -44,13 +44,21 @@ class StudentsList extends Component {
       }
     return (
       <div className="add-attendance">
-      <DatePicker   selected={this.state.date}
-                    onChange={this.onDateChange}
-                    dateFormat="YYYY-MM-DD"
-                />
+        <AddAttendance  students={this.props.students}
+                        gradeId={this.props.gradeId}
+                        displayAttendanceForm={this.props.displayAttendanceForm}
+                        toggleAttendanceFormDisplay={this.props.toggleAttendanceFormDisplay}
+                        />
+        <div className="row">
+            <div className="col-sm-12 text-center">
+                <span>Click to Choose Date</span>
+                <DatePicker className="form-control" selected={this.state.date}
+                        onChange={this.onDateChange}
+                        dateFormat="YYYY-MM-DD"
+                    />
+            </div>
+        </div>
         {attendanceJSX}
-
-        {/* <AddAttendance students={this.props.students} gradeId={this.props.gradeId}/> */}
         </div>
    );
   }

@@ -23,7 +23,7 @@ class AddAttendance extends Component {
       })
     }
     return (
-      <div className="add-attendance">
+      <div className="add-attendance" style={{display: this.props.displayAttendanceForm}}>
                 <section> 	
                 <div className="row">
                     <div className="col-md-12">
@@ -48,8 +48,11 @@ class AddAttendance extends Component {
                                 <input type="time" name="hoursFrom" required="required" className="form-control"/>
                             </div>
                             {studentJSX}
-                            <div className="form-group col-md-12">
+                            <div className="form-group col-md-offset-2 col-md-4">
                                 <input class="btn btn-primary" type="submit" value="Done" />
+                            </div>
+                            <div className="form-group col-md-4">
+                                <input class="btn btn-primary" onClick={this.props.toggleAttendanceFormDisplay} value="Cancel" />
                             </div>
                         </div>  
                         </form>

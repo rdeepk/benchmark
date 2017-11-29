@@ -4,9 +4,10 @@ import Header from './Header';
 import Callback from '../components/Callback';
 import Sidebar from './Sidebar';
 import Content from './Content';
-import { requireAuth, getAccessToken } from '../utils/AuthService';
+import { requireAuth, getAccessToken, isLoggedIn, login } from '../utils/AuthService';
 import {getBulletin} from '../api/bulletin';
 import axios from 'axios';
+import Public from '../components/Public';
 
 class App extends Component {
   constructor() {
@@ -16,8 +17,21 @@ class App extends Component {
       bulletin: "",
       content: "",
       loading: false,
-      grades:''
+      grades:'',
+      isLoggedIn: isLoggedIn(),
+      role:''
     }
+  }
+
+  setLoginState = () => {
+    login();
+    this.setState({
+      isLoggedIn: isLoggedIn()
+    })
+  }
+
+  setRole = (role) => {
+    this.setState({ role })
   }
 
   setActiveLink = (link, data)=> {
@@ -108,27 +122,42 @@ class App extends Component {
    }
 
   render() {
-    if(this.state.loading) {
-      return  (
-      <div>
-      <Header />
-      </div>
+    console.log(this.state.isLoggedIn);
+
+    if(!this.state.isLoggedIn) {
+      return (
+        <div className="App">
+        <Route path="/callback" exact render={(props) => (<Callback />
+                )} />
+          <Public setLoginState={this.setLoginState} />
+        </div>
       )
     }
+
+    if(this.state.loading) {
+      return  (
+        <div>
+          <Header />
+        </div>
+      )
+    }
+
     return (
       <div className="App">
         <Header />
         <div className="container-fluid">
         <div className="row">
           <div className="col-md-3 col-xl-2">
-            <Sidebar setGradesState={this.setGradesState} />
+            <Sidebar  setGradesState={this.setGradesState}
+                      setRole={this.setRole}
+                      role={this.state.role} />
           </div>
-          <div className="col-md-9 col-xl-10">
+          <div className="col-md-9 col-xl-10 bdr-left">
             <Content  activeLink ={this.state.activeLink}
                       bulletin={this.state.bulletin}
                       setBulletinState={this.setBulletinState}
                       grades={this.state.grades}
-                      />
+                      role={this.state.role} />
           </div>
         </div>
         <Route path="/callback" exact render={(props) => (<Callback />

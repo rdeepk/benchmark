@@ -7,7 +7,8 @@ class GradesList extends Component {
     super();
     this.state = {
       selectedGrade : 'Select Grade',
-      attendance: []
+      attendance: [],
+      displayAttendanceForm: 'none'
     }
   }
 
@@ -32,6 +33,14 @@ class GradesList extends Component {
     this.setAttendance();
   }
 
+  toggleAttendanceFormDisplay = (e) => {
+    e.preventDefault();
+    const {displayAttendanceForm} = this.state;
+    this.setState({
+      displayAttendanceForm: displayAttendanceForm === 'block' ? 'none' : 'block'
+    })
+  }
+
   render() {
     let gradeAttendance;
     if(this.state.attendance) {
@@ -53,7 +62,7 @@ class GradesList extends Component {
 
       this.props.grades.forEach((grade, i) => {
         if (grade._id === this.state.selectedGrade) {
-          gradeJSX = <Grade grade={grade} attendance={gradeAttendance} />
+          gradeJSX = <Grade grade={grade} attendance={gradeAttendance} displayAttendanceForm={this.state.displayAttendanceForm} toggleAttendanceFormDisplay={this.toggleAttendanceFormDisplay}/>
         }
       });
     }
@@ -61,13 +70,16 @@ class GradesList extends Component {
     return (
       <div>
       <div className="row content attendance-header">
-        <div className="col-sm-8">
+        <div className="col-sm-6">
         <h1>Attendance</h1>
         </div>
-        <div className="col-sm-4">
+        <div className="col-sm-3">
           <select class="custom-select pull-right" id="inlineFormCustomSelect" value = {this.state.selectedGrade} onChange={this.handleGrades}>
           <option value="Select Grade">Select Grade</option>
           {gradesSelectJSX}</select>
+        </div>
+        <div className="col-sm-3">
+          <a href="" className="btn btn-primary" onClick={(e) => {this.toggleAttendanceFormDisplay(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add Attendance</span></a>
         </div>
       </div>
       {gradeJSX}

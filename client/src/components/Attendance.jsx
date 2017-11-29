@@ -8,20 +8,36 @@ class Attendance extends Component {
     let jsx;
     if(attendance) {
       let presentJSX = attendance.present.map((item, i) => {
-        return <div>Name: {item.name}</div>
+        return <div>{item.name}</div>
       })
 
       let absentJSX = attendance.absent.map((item, i) => {
-        return <div>Name: {item.name}</div>
+        return <div>{item.name}</div>
       })
 
-      jsx = <div>
-              <div>Date: {attendance.date}</div>
-              <div>Subject: {attendance.subject}</div>
-              <div>Time: {attendance.timeFrom} - {attendance.timeTo}</div>
-              <div>Grade: {attendance.grade}</div>
-              <div>Students Present: {presentJSX}</div>
-              <div>Students Absent: {absentJSX}</div>
+      jsx = <div className="attendance">
+              <div className="row title">
+                <div className="col-sm-4">
+                  <div style={{display: 'none'}}>Time: {attendance.timeFrom} - {attendance.timeTo}</div>
+                  <div>Date: {attendance.date}</div>
+                </div>
+                <div className="col-sm-4">
+                  <div>Subject: {attendance.subject}</div>
+                </div>
+                <div className="col-sm-4">
+                <div>Grade: {attendance.grade}</div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-offset-2 col-sm-4">
+                  <p>Students Present</p>
+                  {presentJSX}
+                </div>
+                <div className="col-sm-4">
+                  <p>Students Absent</p>
+                  {absentJSX}
+                </div>
+              </div>             
             </div>
     }
   
