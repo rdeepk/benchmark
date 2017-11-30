@@ -47,7 +47,6 @@ bulletinController.getMessages = (req, res, next) => {
   .sort('-updated_at')
   .populate("owner")
   .exec(function(err,messages) {
-    console.log(messages);
     let response = {
       writeAccess:  _hasWriteAccess(role),
       messages: messages

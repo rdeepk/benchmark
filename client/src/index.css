@@ -278,3 +278,15 @@ input.form-control {
 .highlight {
   color: red;
 }
+
+.student-attendance {
+  margin: 40px 0;
+}
+
+.student-title {
+  background: #eee;
+}
+.attendance {
+  margin: 20px 0;
+  border-bottom: 1px solid #ddd;
+}

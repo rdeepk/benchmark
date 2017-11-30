@@ -4,6 +4,7 @@ import auth0 from 'auth0-js';
 const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 const ROLE = 'role';
+const USER_ID = 'user_id';
 
 const CLIENT_ID = '9UEtyOoCazl0pohRwAja0DlV3hfPd6L2';
 const CLIENT_DOMAIN = 'bench.auth0.com';
@@ -89,6 +90,16 @@ export function setRole() {
 
 export function getRole() {
   return localStorage.getItem(ROLE);
+}
+
+export function setUserId() {
+  let id_token = getIdToken()
+  const token = decode(id_token);
+  localStorage.setItem(USER_ID, token.bench_user_metadata.id);
+}
+
+export function getUserId() {
+  return localStorage.getItem(USER_ID);
 }
 
 function getTokenExpirationDate(encodedToken) {
