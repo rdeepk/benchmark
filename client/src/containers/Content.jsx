@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BulletinList from '../components/bulletin/BulletinList';
 import GradesList from '../components/teachers/GradesList';
+import ChildList from '../components/parents/ChildList';
 import StudentAttendance from '../components/student/StudentAttendance';
 import { requireAuth,isLoggedIn } from '../utils/AuthService';
 import { Route, Link } from 'react-router-dom';
@@ -21,6 +22,7 @@ class Content extends Component {
                                                       role={this.props.role}
                                                       /> )} />
         <Route path="/studentAttendance" exact onEnter={requireAuth} render={(props) => (<StudentAttendance /> )} />
+        <Route path="/childAttendance" exact onEnter={requireAuth} render={(props) => (<ChildList /> )} />
       </div>
     );
   }

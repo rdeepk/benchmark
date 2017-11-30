@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Route } from 'react-router-dom';
 import { setIdToken, setAccessToken, setRole, setUserId } from '../utils/AuthService';
 
 class Callback extends Component {

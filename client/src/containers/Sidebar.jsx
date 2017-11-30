@@ -27,6 +27,7 @@ class Sidebar extends Component {
           <li><Link to="/"><i class="fa fa-fw fa-bell" aria-hidden="true"></i><span>Notice Board</span></Link></li>
           {isLoggedIn() && this.props.role === 'teacher' && <li><Link to="/attendance"><i class="fa fa-fw fa-mortar-board" aria-hidden="true"></i><span>Attendance</span></Link></li>}
           {isLoggedIn() && this.props.role === 'student' && <li><Link to="/studentAttendance"><i class="fa fa-fw fa-mortar-board" aria-hidden="true"></i><span>Attendance</span></Link></li>}
+          {isLoggedIn() && this.props.role === 'parent' && <li><Link to="/childAttendance"><i class="fa fa-fw fa-mortar-board" aria-hidden="true"></i><span>Attendance</span></Link></li>}
         </ul>
       </div>
     );
