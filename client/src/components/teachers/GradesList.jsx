@@ -8,13 +8,15 @@ class GradesList extends Component {
     this.state = {
       selectedGrade : 'Select Grade',
       attendance: [],
-      displayAttendanceForm: 'none'
+      displayAttendanceForm: 'none',
+      displayAddLink: 'none'
     }
   }
 
   handleGrades = (e) => {
     this.setState({
-      selectedGrade: e.target.value
+      selectedGrade: e.target.value,
+      displayAddLink: e.target.value === 'Select Grade'? 'none' : 'block'
     })
   }
 
@@ -45,7 +47,15 @@ class GradesList extends Component {
     })
   }
 
+  displayAttendanceForm = (e) => {
+    e.preventDefault();
+    this.setState({
+      displayAttendanceForm: 'block'
+    })
+  }
+
   render() {
+
     let gradeAttendance;
     let messageText;
 
@@ -78,17 +88,17 @@ class GradesList extends Component {
 
     return (
       <div>
-      <div className="row content attendance-header">
-        <div className="col-sm-6">
-        <h1>Attendance</h1>
+      <div className="content attendance-header flexed">
+        <div>
+          <h1>Attendance</h1>
         </div>
-        <div className="col-sm-3">
-          <select class="custom-select pull-right" id="inlineFormCustomSelect" value = {this.state.selectedGrade} onChange={this.handleGrades}>
+        <div>
+          <select class="custom-select" id="inlineFormCustomSelect" value = {this.state.selectedGrade} onChange={this.handleGrades}>
           <option value="Select Grade">Select Grade</option>
           {gradesSelectJSX}</select>
         </div>
-        <div className="col-sm-3">
-          <a href="" className="btn btn-primary" onClick={(e) => {this.toggleAttendanceFormDisplay(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add Attendance</span></a>
+        <div style ={{display: this.state.displayAddLink}}>
+          <a href="" className="btn btn-primary" onClick={(e) => {this.displayAttendanceForm(e)}}><i class="fa fa-plus" aria-hidden="true"></i><span>Add Attendance</span></a>
         </div>
       </div>
       {messageText}

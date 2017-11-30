@@ -255,9 +255,39 @@ input.form-control {
   margin-bottom: 50px;
 }
 
+.attendance-header.flexed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.attendance-header.flexed > div {
+  padding: 0px 0 0 15px;
+} 
+
+.custom-select {
+  height: 46px;
+}
+
+.attendance-header.flexed > div:first-child {
+  flex: 3;
+  padding: 0;
+}
+
+@media (max-width: 767px) {
+  .attendance-header.flexed {
+    flex-flow: wrap;
+  }
+  .attendance-header.flexed > div {
+    width: 100%;
+    text-align: center;
+    margin: 5px 0;
+  }
+}
+
 .react-datepicker-wrapper {
   width: 50%;
-  margin-bottom: 50px;
+  margin: 20px 0;
 }
 
 .react-datepicker__input-container {
@@ -265,18 +295,23 @@ input.form-control {
 }
 
 .attendance .title {
-  background: #eee;
-  text-align: center;
-  padding: 15px 0;
-  margin-bottom: 50px;
+  background: #f2f2f2;
+  font-weight: bold;
+  /* text-align: center; */
+  padding: 10px 0;
+  margin-bottom: 20px;
 }
 
 .add-attendance {
   margin-bottom: 50px;
 }
 
+.add-attendance .btn {
+  margin: 10px;
+}
+
 .highlight {
-  color: red;
+  /* color: red; */
 }
 
 .student-attendance {
@@ -286,7 +321,91 @@ input.form-control {
 .student-title {
   background: #eee;
 }
+
+@media (max-width: 767px) {
+.student-row-title {
+  display: none;
+}
+}
+
 .attendance {
-  margin: 20px 0;
-  border-bottom: 1px solid #ddd;
+  /* padding: 10px 0; */
+  /* border-bottom: 1px solid #ddd; */
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .toggle {
+    max-width: 70%;
+  }
+}
+
+.toggle > div {
+  margin: 0 5px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  /* display: -webkit-flex-inline;
+  display: -ms-flexbox-inline;
+  display: flex-inline;
+  flex: 0 0 56px !important; */
+  width: 56px;
+  height: 32px;
+  padding: 0 !important;
+
+  /* -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-flex: 0 0 56px !important;
+  -ms-flex: 0 0 56px !important; */
+}
+
+.switch input {
+  display: none;
+}
+
+.switch input:not(:checked) + .slider {
+  background-color: #1495d8;
+}
+
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px #1495d8;
+}
+
+.switch input:not(:checked) + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.switch .slider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  cursor: pointer;
+  transition: 0.4s;
+  border-radius: 40px;
+  background-color: #ccc;
+}
+
+.switch .slider::before {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+  width: 26px;
+  height: 26px;
+  content: "";
+  transition: 0.4s;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 2px 3px 3px rgba(0, 0, 0, 0.07);
 }

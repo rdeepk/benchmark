@@ -49,7 +49,7 @@ class StudentAttendance extends Component {
     }
 
   render() {
-    let attendanceData, attendanceJSX, present = true, userData, attendanceHeaderJSX, grade, teacher;
+    let attendanceData, attendanceJSX, present = true, userData, attendanceHeaderJSX, grade, teacher, attendanceSubHeaderJSX;
     let userId = getUserId();
 
     if(this.state.attendance && this.state.user) {
@@ -63,15 +63,17 @@ class StudentAttendance extends Component {
                 grade = item.grade.name;
             })
             attendanceHeaderJSX = teacher ? 
-                        <div className="student-title">
-                            <div className="row">
-                                <div className="col-md-3 offset-md-3">
-                                    <div>Date: {this.getFormattedDate(this.state.date)}</div>
-                                    <div>Student Name: {this.state.user.name}</div>
-                                    <div>Grade: {grade}</div>
-                                </div>
-                            </div>
+                        <div>
+                            <strong>Name:</strong> {this.state.user.name}<br />                      
+                            <strong>Grade:</strong> {grade}
                         </div> : '';
+
+            attendanceSubHeaderJSX = <div className="row title student-row-title">
+                                        <div className="col-md-4">Subject</div>
+                                        <div className="col-md-4">Teacher</div>
+                                        <div className="col-md-4">Attendance</div>
+                                    </div>
+
 
             attendanceJSX = attendanceData.map((item, i) => {
                 //lets check if user from the absent array.
@@ -82,6 +84,7 @@ class StudentAttendance extends Component {
                         }
                         return false;
                     })
+                    
                 return <Attendance attendance={item} present={present}/>
             })
         }
@@ -89,6 +92,12 @@ class StudentAttendance extends Component {
     
     return (
         <div>
+            <div className="content attendance-header flexed">
+        <div>
+          <h1>Attendance</h1>
+        </div>
+        <div>{attendanceHeaderJSX}</div>
+        </div>
             <div className="row">
                 <div className="col-sm-12 text-center">
                     <span>Click to Choose Date</span>
@@ -98,9 +107,11 @@ class StudentAttendance extends Component {
                         />
                 </div>
             </div>
-            <div className="student-attendance">
-                {attendanceHeaderJSX}
+            <div className="container-fluid">
+                <div className="attendance">
+                {attendanceSubHeaderJSX}
                 {attendanceJSX}
+                </div>
             </div>
         </div>
    );

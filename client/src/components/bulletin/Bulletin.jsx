@@ -58,7 +58,7 @@ class Bulletin extends Component {
                     <div className="row">
                         <div className="col-md-9 col-lg-10">
                             <div className="message">{bulletin.message}</div>
-                            <div className="posted-by">Posted by {bulletin.owner.name} on {this.getFormattedDate(bulletin.created_at)}</div>
+                            <div className="posted-by">Posted by {bulletin.owner.name} on {this.getFormattedDate(bulletin.updated_at)}</div>
                         </div>
                         <div className="col-md-3 col-lg-2 text-right">
                             <a href="" id={bulletin._id} onClick={(e) => {this.toggleEditFormDisplay(e)}} ><i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -86,7 +86,7 @@ class Bulletin extends Component {
                 :  <div className="row">
                         <div className="col-sm-12">
                             <div className="message">{bulletin.message}</div>
-                            <div className="posted-by">Posted by {bulletin.owner.name} on {bulletin.created_at}</div>
+                            <div className="posted-by">Posted by {bulletin.owner.name} on {this.getFormattedDate(bulletin.updated_at)}</div>
                         </div>
                     </div>}
         </div>

@@ -11,15 +11,20 @@ class Attendance extends Component {
         const {attendance} = this.props;
         let jsx;
         if(attendance) {
-        jsx = <div className="attendance">
+        jsx = <div className="attendance-body">
                     <div className="row">
-                        <div className="col-sm-12">
-                            <div>Time: {this.formatTime(attendance.timeFrom)} - {this.formatTime(attendance.timeTo)}
-                            <div>Subject: {attendance.subject}</div></div>
-                            <div>Teacher Name: {attendance.owner.name}</div>
-                            <div>Attendance: {this.props.present ? 'Present' : 'Absent'}</div>
+                        <div className="col-md-4">
+                            {/* <div>Time: {this.formatTime(attendance.timeFrom)} - {this.formatTime(attendance.timeTo)}</div> */}
+                            <div><span className="d-md-none">Subject:</span> {attendance.subject}</div>
+                        </div>
+                        <div className="col-md-4">
+                            <div><span className="d-md-none">Teacher:</span> {attendance.owner.name}</div>
+                        </div>
+                        <div className="col-md-4">
+                            <div><span className="d-md-none">Attendance:</span> {this.props.present ? 'Present' : 'Absent'}</div>
                         </div>
                     </div>
+                    <hr />
                 </div>
         }
     

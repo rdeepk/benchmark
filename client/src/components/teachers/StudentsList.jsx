@@ -55,6 +55,7 @@ class StudentsList extends Component {
                 <DatePicker className="form-control" selected={this.state.date}
                         onChange={this.onDateChange}
                         dateFormat="YYYY-MM-DD"
+                        utcOffset={0}
                     />
             </div>
         </div>

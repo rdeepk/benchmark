@@ -47,8 +47,8 @@ export function createAttendance(gradeId, data) {
     let newAttendance = {
         date: new Date(data.date.value).toISOString(),
         subject: data.subject.value,
-        timeFrom: new Date(data.date.value + ' ' + data.hoursFrom.value).toISOString(),
-        timeTo: new Date(data.date.value + ' ' + data.hoursTo.value).toISOString(),
+        // timeFrom: new Date(data.date.value + ' ' + data.hoursFrom.value).toISOString(),
+        // timeTo: new Date(data.date.value + ' ' + data.hoursTo.value).toISOString(),
         grade: gradeId,
         present: present,
         absent: absent

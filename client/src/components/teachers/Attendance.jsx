@@ -19,29 +19,33 @@ class Attendance extends Component {
         return <div>{item.name}</div>
       })
 
-      jsx = <div className="attendance">
+      jsx = <div className="container-fluid"> 
+            <div className="attendance">
               <div className="row title">
-                <div className="col-sm-4">
+                <div className="col-sm-6 col-md-5">
                   <div style={{display: 'none'}}>Time: {attendance.timeFrom} - {attendance.timeTo}</div>
                   <div>Date: {this.getFormattedDate(attendance.date)}</div>
                 </div>
-                <div className="col-sm-4">
+                <div className="col-sm-6 col-md-5">
                   <div>Subject: {attendance.subject}</div>
                 </div>
-                <div className="col-sm-4">
+                {/* <div className="col-sm-4">
                 <div>Grade: {attendance.grade.name}</div>
-                </div>
+                </div> */}
               </div>
               <div className="row">
-                <div className="col-sm-offset-2 col-sm-4">
-                  <p>Students Present</p>
+                <div className="col-sm-6 col-md-5">
+                  <p><strong>Present</strong></p>
                   {presentJSX}
+                  <br />
                 </div>
-                <div className="col-sm-4">
-                  <p>Students Absent</p>
+                <div className="col-sm-6 col-md-5">
+                  <p><strong>Absent</strong></p>
                   {absentJSX}
+                  <br />
                 </div>
               </div>             
+            </div>
             </div>
     }
   
