@@ -9,7 +9,8 @@ class Grade extends Component {
                       gradeId={this.props.grade._id}
                       attendance={this.props.attendance}
                       displayAttendanceForm={this.props.displayAttendanceForm}
-                      toggleAttendanceFormDisplay={this.props.toggleAttendanceFormDisplay} />
+                      toggleAttendanceFormDisplay={this.props.toggleAttendanceFormDisplay}
+                      addToAttendanceState={this.props.addToAttendanceState} />
       </div>
    );
   }

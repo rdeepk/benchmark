@@ -28,7 +28,12 @@ attendanceController.create = (req, res, next) => {
     attendance.owner = decoded.bench_user_metadata.id;
     var newAttendance = new Attendance(attendance);
     newAttendance.save().then((doc) => {
-      res.send(doc);
+      Attendance.populate(newAttendance, [{path:"owner"},{path: "grade"}, {path: "present"}, {path: "absent"}], function(err, attendance) {
+        res.send(attendance);
+      }, (e) => {
+        console.log(e);
+        res.status(400).send(e);
+      });
     }, (e) => {
       console.log(e);
       res.status(400).send(e);

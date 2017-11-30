@@ -47,6 +47,7 @@ class StudentsList extends Component {
                         gradeId={this.props.gradeId}
                         displayAttendanceForm={this.props.displayAttendanceForm}
                         toggleAttendanceFormDisplay={this.props.toggleAttendanceFormDisplay}
+                        addToAttendanceState={this.props.addToAttendanceState}
                         />
         <div className="row">
             <div className="col-sm-12 text-center">

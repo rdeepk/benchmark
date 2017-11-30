@@ -4,8 +4,11 @@ import {createAttendance} from '../../api/attendance';
 class AddAttendance extends Component {
 
   handleAttendanceSubmit = (e) => {
-    e.preventDefault();
-    createAttendance(this.form.id, e.target);
+      e.preventDefault();
+    createAttendance(this.form.id, e.target)
+    .then((data)=> {
+        this.props.addToAttendanceState(data);
+    })
     this.form.reset();
   }
 
@@ -13,12 +16,9 @@ class AddAttendance extends Component {
     let studentJSX;
     if(this.props.students) {
       studentJSX = this.props.students.map((student, i) => {
-        return <div className="form-group col-md-6">
+        return <div className="form-group col-md-12">
           <label htmlFor={student._id}>{i+1}. {student.name}</label>
-          <select class="custom-select form-control" name={'attendance'+i} id={student._id} onChange={this.handleAttendance}>
-          <option value={true}>P</option>
-          <option value={false}>A</option>
-          </select>
+          <input type="checkbox" id={student._id} name={'attendance'+i} value="absent" onChange={this.handleAttendance} />
         </div>
       })
     }
@@ -40,11 +40,11 @@ class AddAttendance extends Component {
                             </div>
                             <input type="hidden" name="studentCount" value={this.props.students.length} required="required" className="form-control"/>
                             <div className="form-group col-md-6">
-                                <label htmlFor="hoursFrom">Time To:</label>
+                                <label htmlFor="hoursFrom">Start Time:</label>
                                 <input type="time" name="hoursTo" required="required" className="form-control"/>
                             </div>
                             <div className="form-group col-md-6">
-                                <label htmlFor="hoursFrom">Time From:</label>
+                                <label htmlFor="hoursFrom">End Time:</label>
                                 <input type="time" name="hoursFrom" required="required" className="form-control"/>
                             </div>
                             {studentJSX}

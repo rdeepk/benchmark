@@ -32,6 +32,11 @@ class GradesList extends Component {
     this.setAttendance();
   }
 
+  addToAttendanceState = (data) => {
+    this.state.attendance.push(data);
+    this.setState({attendance: this.state.attendance});
+  }
+
   toggleAttendanceFormDisplay = (e) => {
     e.preventDefault();
     const {displayAttendanceForm} = this.state;
@@ -62,7 +67,11 @@ class GradesList extends Component {
 
       this.props.grades.forEach((grade, i) => {
         if (grade._id === this.state.selectedGrade) {
-          gradeJSX = <Grade grade={grade} attendance={gradeAttendance} displayAttendanceForm={this.state.displayAttendanceForm} toggleAttendanceFormDisplay={this.toggleAttendanceFormDisplay}/>
+          gradeJSX = <Grade grade={grade}
+                            attendance={gradeAttendance}
+                            displayAttendanceForm={this.state.displayAttendanceForm}
+                            toggleAttendanceFormDisplay={this.toggleAttendanceFormDisplay}
+                            addToAttendanceState={this.addToAttendanceState}/>
         }
       });
     }

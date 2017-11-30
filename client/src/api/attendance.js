@@ -41,7 +41,7 @@ export function getAttendanceForStudent() {
 export function createAttendance(gradeId, data) {
     let present = [], absent = [];
     for (let i = 0; i < data.studentCount.value; i++ ) {
-        data['attendance'+i].value == 'true' ? present.push(data['attendance'+i].id) : absent.push(data['attendance'+i].id);
+        data['attendance'+i].checked !== true ? present.push(data['attendance'+i].id) : absent.push(data['attendance'+i].id);
     }
 
     let newAttendance = {
