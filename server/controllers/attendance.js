@@ -26,10 +26,12 @@ _getAllGrades = () => {
 }
 
 _getGradeForStudent = (grades, studentId) => {
+  console.log("here");
     for(let i = 0; i < grades.length; i++){
       if(grades[i].students.length > 0) {
         for(let k=0; k <grades[i].students.length; k++) {
           if(grades[i].students[k] == studentId) {
+            console.log(grades[i])
             return grades[i];
           }
         }
@@ -81,6 +83,30 @@ attendanceController.getAttendanceForTeacher = (req, res, next) => {
     }
 }
 
+
+attendanceController.getAttendanceForParent = (req, res, next) => {
+  let decoded = jwtDecode(req.headers.id_token);
+  let role = decoded.bench_app_metadata.role;
+  if(role === 'parent') {
+    _getAllGrades().then((resp) => {
+      let sudentGrades = _getGradeForStudent(resp, req.query.id)
+        Attendance.find({grade: sudentGrades._id})
+          .populate('owner')
+          .populate('grade')
+          .populate('present')
+          .populate('absent')
+          .exec(function (err, attendance) {
+              console.log("Attendance:   ",attendance);
+              res.send({attendance});
+          }, (e) => {
+            console.log(e);
+            res.status(400).send(e);
+          });
+      })
+    }
+}
+
+
 attendanceController.getAttendanceForStudent = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
@@ -99,18 +125,6 @@ attendanceController.getAttendanceForStudent = (req, res, next) => {
           console.log(e);
           res.status(400).send(e);
         });
-      
-      
-      
-      
-      // .then((attendance) => {
-      //   if (!attendance) {
-      //     return res.status(404).send();
-      //   }
-      //   res.send({attendance});
-      //   }, (e) => {
-      //     res.status(400).send(e);
-      //   });
     })
   }
 }

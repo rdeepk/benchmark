@@ -32,6 +32,7 @@ var invite = require('./routes/invite');
 var bulletin = require('./routes/bulletin');
 var teacher = require('./routes/teacher');
 var attendance = require('./routes/attendance');
+var parent = require('./routes/parent');
 
 // app.use('/', index);
 // app.use('/links', index);
@@ -42,6 +43,7 @@ app.use('/invite', invite);
 app.use('/bulletin', bulletin);
 app.use('/teacher', teacher);
 app.use('/attendance', attendance);
+app.use('/parent', parent);
 
 
 

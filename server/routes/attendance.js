@@ -7,5 +7,6 @@ var attendance = require('./../controllers/attendance');
 router.post('/create', config.checkJwt, attendance.create);
 router.get('/get', config.checkJwt, attendance.getAttendanceForTeacher);
 router.get('/student', config.checkJwt, attendance.getAttendanceForStudent);
+router.get('/forParent', config.checkJwt, attendance.getAttendanceForParent);
 
 module.exports = router;
