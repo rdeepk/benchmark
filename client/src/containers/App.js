@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import Header from './Header';
 import Callback from '../components/Callback';
-import Sidebar from './Sidebar';
-import Content from './Content';
-import { isLoggedIn, login, getRole} from '../utils/AuthService';
+import { isLoggedIn, login, getRole, getUser} from '../utils/AuthService';
 import {getBulletin} from '../api/bulletin';
 import axios from 'axios';
 import Public from '../components/Public';
+import io from 'socket.io-client';
+import Sidebar from './Sidebar';
+import Content from './Content';
+import Header from './Header';
+import { USER_CONNECTED, LOGOUT, VERIFY_USER } from '../utils/events';
 
+const socketUrl = 'http://localhost:8000/'
 class App extends Component {
   constructor() {
     super();
@@ -19,8 +22,46 @@ class App extends Component {
       loading: false,
       grades:'',
       isLoggedIn: isLoggedIn(),
-      role: getRole()
+      role: getRole(),
+      socket: null,
+      user: null
     }
+  }
+
+  setUser = () => {
+    let user = getUser();
+    this.setState({user: JSON.parse(user)});
+    const { socket } = this.state
+    socket.emit(VERIFY_USER, user, this.connectUser)
+  }
+
+  connectUser = (user) => {
+    this.state.user.socketId = user.user.socketId;
+    this.setState({user: this.state.user}, () => {
+      const { socket } = this.state
+      socket.emit(USER_CONNECTED, this.state.user);      
+    });
+    
+  }
+  
+  logout = () => {
+		const { socket } = this.state
+		socket.emit(LOGOUT)
+		this.setState({user:null})
+	}
+
+  componentWillMount() {
+		var socket = io(socketUrl)
+		this.setState({ socket })
+		this.initSocket(socket)
+	}
+	
+	initSocket = (socket) => {
+		socket.on('connect', (value)=>{
+      console.log('connected');
+    })
+    this.setState({socket});
+		//socket.on('disconnect', this.reconnectUserInfo)
   }
 
   setLoginState = () => {
@@ -119,11 +160,11 @@ class App extends Component {
    }
 
   render() {
-
+    console.log(this.state.isLoggedIn);
     if(!this.state.isLoggedIn) {
       return (
         <div className="App">
-        <Route path="/callback" exact render={(props) => (<Callback setLoginState={this.setLoginState} />
+        <Route path="/callback" exact render={(props) => (<Callback setLoginState={this.setLoginState} setUser={this.setUser} />
                 )} />
           <Public />
         </div>
@@ -137,9 +178,10 @@ class App extends Component {
         </div>
       )
     }
-
+    const {user, socket} = this.state;
     return (
       <div className="App">
+        <div>
         <Header />
         <div className="container-fluid">
         <div className="row">
@@ -153,10 +195,16 @@ class App extends Component {
                       bulletin={this.state.bulletin}
                       setBulletinState={this.setBulletinState}
                       grades={this.state.grades}
-                      role={this.state.role} />
+                      role={this.state.role}
+                      setLoginState={this.setLoginState}
+                      setUser={this.setUser}
+                      socket={socket}
+                      user={user}
+                      />
           </div>
         </div>
-        <Route path="/callback" exact render={(props) => (<Callback />
+        </div>
+        <Route path="/callback" exact render={(props) => (<Callback  setLoginState={this.setLoginState} setUser={this.setUser}/>
                 )} />
       </div>
       </div>

@@ -18,6 +18,10 @@ class BulletinList extends Component {
         })
     }
 
+    componentDidMount() {
+      this.props.setUser();
+    }
+
   render() {
     const { bulletin } = this.props;
     let contentJSX;

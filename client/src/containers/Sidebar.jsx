@@ -24,10 +24,11 @@ class Sidebar extends Component {
     return (
       <div className="sidebar">
         <ul>
-          <li><Link to="/"><i class="fa fa-fw fa-bell" aria-hidden="true"></i><span>Notice Board</span></Link></li>
-          {isLoggedIn() && this.props.role === 'teacher' && <li><Link to="/attendance"><i class="fa fa-fw fa-mortar-board" aria-hidden="true"></i><span>Attendance</span></Link></li>}
-          {isLoggedIn() && this.props.role === 'student' && <li><Link to="/studentAttendance"><i class="fa fa-fw fa-mortar-board" aria-hidden="true"></i><span>Attendance</span></Link></li>}
-          {isLoggedIn() && this.props.role === 'parent' && <li><Link to="/childAttendance"><i class="fa fa-fw fa-mortar-board" aria-hidden="true"></i><span>Attendance</span></Link></li>}
+          <li><Link to="/"><i className="fa fa-fw fa-bell" aria-hidden="true"></i><span>Notice Board</span></Link></li>
+          {isLoggedIn() && this.props.role === 'teacher' && <li><Link to="/attendance"><i className="fa fa-fw fa-mortar-board" aria-hidden="true"></i><span>Attendance</span></Link></li>}
+          {isLoggedIn() && this.props.role === 'student' && <li><Link to="/studentAttendance"><i className="fa fa-fw fa-mortar-board" aria-hidden="true"></i><span>Attendance</span></Link></li>}
+          {isLoggedIn() && this.props.role === 'parent' && <li><Link to="/childAttendance"><i className="fa fa-fw fa-mortar-board" aria-hidden="true"></i><span>Attendance</span></Link></li>}
+          {isLoggedIn() && <li><Link to="/group"><i className="fa fa-fw fa-comments-o" aria-hidden="true"></i><span>Chat</span></Link></li>}
         </ul>
       </div>
     );

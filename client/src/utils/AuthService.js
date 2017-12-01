@@ -5,6 +5,7 @@ const ID_TOKEN_KEY = 'id_token';
 const ACCESS_TOKEN_KEY = 'access_token';
 const ROLE = 'role';
 const USER_ID = 'user_id';
+const USER = 'user';
 
 const CLIENT_ID = '9UEtyOoCazl0pohRwAja0DlV3hfPd6L2';
 const CLIENT_DOMAIN = 'bench.auth0.com';
@@ -115,4 +116,18 @@ function getTokenExpirationDate(encodedToken) {
 function isTokenExpired(token) {
   const expirationDate = getTokenExpirationDate(token);
   return expirationDate < new Date();
+}
+
+export function setUser() {
+  let id_token = getIdToken()
+  const token = decode(id_token);
+ let user = {
+   id: token.bench_user_metadata.id,
+   name: token.given_name
+ }
+  localStorage.setItem(USER, JSON.stringify(user));
+}
+
+export function getUser() {
+  return localStorage.getItem(USER);
 }

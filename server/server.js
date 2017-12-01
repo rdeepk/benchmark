@@ -4,9 +4,11 @@ const express = require('express'),
     dotenv = require('dotenv');
 var port = process.env.PORT || 8000;
 var cors = require('cors')
-const session = require('express-session');
-const passport = require('passport');
-const Auth0Strategy = require('passport-auth0');
+// const session = require('express-session');
+// const passport = require('passport');
+// const Auth0Strategy = require('passport-auth0');
+var io = module.exports.io = require('socket.io').listen(app.listen(port));
+const SocketManager = require('./SocketManager');
 
 dotenv.load();
 
@@ -60,4 +62,5 @@ app.use(function(err, req, res, next) {
   res.send(err);
 });
 
-app.listen(port);
+// app.listen(port);
+io.on('connection', SocketManager);

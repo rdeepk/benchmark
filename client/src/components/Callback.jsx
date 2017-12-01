@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { setIdToken, setAccessToken, setRole, setUserId } from '../utils/AuthService';
+import { setIdToken, setAccessToken, setRole, setUserId, setUser } from '../utils/AuthService';
 
 class Callback extends Component {
     componentDidMount() {
@@ -7,11 +7,13 @@ class Callback extends Component {
         setIdToken();
         setRole();
         setUserId();
-       this.props.setLoginState()
+        setUser();
+        this.props.setLoginState()
         window.location.href = "/";
       }
     
       render() {
+        console.log("from callback")
         return null;
       }
     }
