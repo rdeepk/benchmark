@@ -5,6 +5,9 @@ import moment from 'moment';
 import Attendance from './Attendance';
 import {getUserId} from '../../utils/AuthService';
 
+/*
+*  Component populated with the seleccted child data for a parent.
+*/
 class Child extends Component {
     constructor() {
         super();

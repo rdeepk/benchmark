@@ -6,6 +6,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import AddAttendance from './AddAttendance';
 import Attendance from './Attendance';
 
+/*
+*  Component populated with all students of the selected grade for teachers.
+*/
 class StudentsList extends Component {
     constructor() {
         super();
@@ -14,10 +17,16 @@ class StudentsList extends Component {
         }
     }
 
+/*
+*  Sets the new date state on change event of date dropdown.
+*/
   onDateChange = (date) => {
     this.setState({ date });
   }
 
+/*
+*  Compare two dates to check if they match.
+*/
   _isDateSame = (date1, date2) => {
     let dateOne = new Date(date1);
     let dateTwo = new Date(date2);
@@ -31,6 +40,8 @@ class StudentsList extends Component {
   }
 
   render() {
+
+    //get attendance for the selected date.
       let attendanceData = this.props.attendance.filter((item, i) => {
         return this._isDateSame(item.date, this.state.date);
       })

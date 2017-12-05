@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
+/*
+*  Component populates the attendance for the selected date of a grade.
+*/
 class Attendance extends Component {
   
   getFormattedDate = (date) => {

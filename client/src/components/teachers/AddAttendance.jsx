@@ -3,8 +3,14 @@ import {createAttendance} from '../../api/attendance';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
+/*
+*  Component handles the addition of new attendance object by teacher.
+*/
 class AddAttendance extends Component {
 
+/*
+*  Hnadler for the submission of add new attendance form.
+*/
   handleAttendanceSubmit = (e) => {
       e.preventDefault();
       this.props.toggleAttendanceFormDisplay(e);
@@ -16,6 +22,8 @@ class AddAttendance extends Component {
   }
 
   render() {
+
+    //get students for the particular grade for addimg attendance.
     let studentJSX;
     if(this.props.students) {
       studentJSX = this.props.students.map((student, i) => {

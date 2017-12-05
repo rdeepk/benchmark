@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
+/*
+*  Component population the single attendance row.
+*/
 class Attendance extends Component {
 
     formatTime = (time) => {

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 
+/*
+*  Component populated with the attendance of a selected child.
+*/
 class Attendance extends Component {
 
     /*
