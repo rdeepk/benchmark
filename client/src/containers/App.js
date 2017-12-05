@@ -9,6 +9,11 @@ import {getBulletin} from '../api/bulletin';
 import axios from 'axios';
 import Public from '../components/Public';
 
+const socketUrl = 'http://localhost:8000/'
+
+/*
+*  Parent component of application. Handles socket connection for chat and contains the parent structural components for app.
+*/
 class App extends Component {
   constructor() {
     super();
@@ -29,10 +34,16 @@ class App extends Component {
     })
   }
 
+  /*
+  *  Sets the role of the loggedin user.
+  */
   setRole = (role) => {
     this.setState({ role })
   }
 
+  /*
+  *  Sets the default active link to be displayed when user logs in.
+  */
   setActiveLink = (link, data)=> {
     this.setState({
       activeLink: link,
@@ -41,13 +52,19 @@ class App extends Component {
     })
   }
 
+  /*
+  *  Sets the state for grades.
+  */
   setGradesState = (grades) => {
     this.setState({
       grades: grades
     })
   }
 
-   componentDidMount() {
+  /*
+  *  Starts the loading process and gets bulletin from api to display on active link.
+  */
+  componentDidMount() {
      this.setState({
        loading: true
      })
@@ -59,8 +76,11 @@ class App extends Component {
         })
         this.setActiveLink('bulletin', data);
       });
-   }
+  }
 
+  /*
+  *  Wrapper to redirect the relevant crud operation for bulletins.
+  */
    setBulletinState = (action, data) => {
     switch(action) {
       case 'addNew':
@@ -75,6 +95,9 @@ class App extends Component {
     }
    }
 
+  /*
+  *  Sets the bulletin state after adding new.
+  */
    addNewBulletin = (data) => {
     let { bulletin } = this.state;
     bulletin.messages.unshift(data);
@@ -83,6 +106,9 @@ class App extends Component {
     })
    }
 
+  /*
+  *  Sets the state for bulletin after update operation.
+  */
    updateBulletin = (id, data) => {
     let { bulletin } = this.state;
     let newMessages = bulletin.messages.map((message, key) => {
@@ -102,6 +128,9 @@ class App extends Component {
     })
    }
 
+  /*
+  *  Sets the state for bulletin after delete operation.
+  */
    deleteBulletin = (id) => {
     let { bulletin } = this.state;
     let newMessages = bulletin.messages.filter((message, key) => {

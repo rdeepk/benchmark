@@ -6,6 +6,9 @@ import StudentAttendance from '../components/student/StudentAttendance';
 import { requireAuth,isLoggedIn } from '../utils/AuthService';
 import { Route, Link } from 'react-router-dom';
 
+/*
+*  Parent container to display the content as per the active link in the sidebar.
+*/
 class Content extends Component {
 
   render() {
