@@ -3,6 +3,9 @@ import moment from 'moment';
 
 class Attendance extends Component {
 
+    /*
+    *  Takes time as a param and return the formatted value.
+    */
     formatTime = (time) => {
         return moment(time).format("hh:mm:ss a");
     }

@@ -12,6 +12,9 @@ class Bulletin extends Component {
         }
     }
 
+    /*
+    *	Toggles the diplay of edit bulletin form.
+    */
     toggleEditFormDisplay = (event) => {
         event.preventDefault();
         const { displayEditBulletinForm } = this.state;
@@ -20,6 +23,9 @@ class Bulletin extends Component {
         })
     }
 
+    /*
+    *	Triggered at the click of delete for a bulletin.
+    */
     deleteBulletin = (event) => {
         event.preventDefault();
         deleteBulletin(event.target.id)
@@ -27,7 +33,10 @@ class Bulletin extends Component {
                   this.props.setBulletinState('delete', {id: resp.message._id});
                 })
       }
-
+    
+    /*
+    * This function is triggered at the on change event of edit bulletin form. It sets the changed state of the input field.
+    */
     setEditedValue = (event) => {
         event.preventDefault();
         this.state.bulletin.message = this.form.message.value;
@@ -36,6 +45,10 @@ class Bulletin extends Component {
         })
     }
 
+
+    /*
+    *	Triggered at the click event when user is done editing  the bulletin.
+    */
     handleEditFormSubmit = (event) => {
         this.toggleEditFormDisplay(event);
         updateBulletin(this.state.bulletin)
@@ -44,9 +57,14 @@ class Bulletin extends Component {
           })
     }
 
+
+    /*
+    *	Takes the date as a param and returnes the formatted date.
+    */
     getFormattedDate = (date) => {
         return  moment(date).format('YYYY-MM-DD')
     }
+
 
    render() {
     const { bulletin } = this.props;
@@ -65,6 +83,7 @@ class Bulletin extends Component {
                             <a href="" value={bulletin.message} onClick={(e) => {this.deleteBulletin(e)}} ><i id={bulletin._id} class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </div>
                     </div>
+                    {/* Edit bulletin form is hidden by default and is displayed whe user clicks the edit button */}
                     <div className="row">
                         <div className="col-sm-12">
                             <div style={{ display: this.state.displayEditBulletinForm }} className="edit">

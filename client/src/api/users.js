@@ -5,6 +5,9 @@ const baseUrl = 'http://localhost:8000';
 const ACCESS_TOKEN_KEY = getAccessToken();
 const ID_TOKEN_KEY = getIdToken();
 
+/*
+*	Gets user by passing id as a param.
+*/
 export function getUserById(id) {
     return new Promise((resolve, reject) => {
         axios.get(`${baseUrl}/user/id?id=${id}`,  { headers: { 

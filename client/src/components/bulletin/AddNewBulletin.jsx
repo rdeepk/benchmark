@@ -3,6 +3,9 @@ import { createBulletin } from '../../api/bulletin';
 
 class AddNewBulletin extends Component {
 
+    /*
+    * Handles the submission of add new bulletin. Toggles the form and triggers the setting of state,
+    */
     handleAddNewFormSubmit = (event) => {
         this.props.toggleAddNewFormDisplay(event);
         createBulletin( this.form.message.value )

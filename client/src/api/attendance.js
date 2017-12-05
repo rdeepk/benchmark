@@ -5,7 +5,9 @@ const baseUrl = 'http://localhost:8000';
 const ACCESS_TOKEN_KEY = getAccessToken();
 const ID_TOKEN_KEY = getIdToken();
 
-
+/*
+*	Gets the attendance of a student to be displayed for teacher.
+*/
 export function getAttendance() {
     return new Promise((resolve, reject) => {
         axios.get(`${baseUrl}/attendance/get`,  { headers: { 
@@ -22,6 +24,9 @@ export function getAttendance() {
       })
 }
 
+/*
+*	Gets attendance to be displayed for student.
+*/
 export function getAttendanceForStudent() {
     return new Promise((resolve, reject) => {
         axios.get(`${baseUrl}/attendance/student`,  { headers: { 
@@ -38,6 +43,9 @@ export function getAttendanceForStudent() {
       })
 }
 
+/*
+*	Sends request to create attendance object for student by teacher.
+*/
 export function createAttendance(gradeId, data) {
     let present = [], absent = [];
     for (let i = 0; i < data.studentCount.value; i++ ) {
