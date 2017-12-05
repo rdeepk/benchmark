@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import Bulletin from '../components/bulletin/Bulletin';
-import { Route, Link } from 'react-router-dom'
-import { requireAuth, isLoggedIn, setRole } from '../utils/AuthService';
+import { Link } from 'react-router-dom'
+import { isLoggedIn, setRole } from '../utils/AuthService';
 import {getLinks, getGrades} from '../api/api';
 
+/*
+*  Sidebar container to diplay the links relevant to the role of logged in user.
+*/
 class Sidebar extends Component {
 
   componentDidMount() {

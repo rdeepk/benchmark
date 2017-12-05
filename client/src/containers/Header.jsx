@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import { requireAuth, getAccessToken } from '../utils/AuthService';
 import { login, logout, isLoggedIn } from '../utils/AuthService';
 
+/*
+*  Header component after login. DIsplays the logo and logout link..
+*/
 class Header extends Component {
 
   render() {

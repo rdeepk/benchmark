@@ -3,10 +3,13 @@ import BulletinList from '../components/bulletin/BulletinList';
 import GradesList from '../components/teachers/GradesList';
 import ChildList from '../components/parents/ChildList';
 import StudentAttendance from '../components/student/StudentAttendance';
-import { requireAuth,isLoggedIn } from '../utils/AuthService';
-import { Route, Link } from 'react-router-dom';
+import { requireAuth } from '../utils/AuthService';
+import { Route } from 'react-router-dom';
 import ChatContainer from '../components/chat/ChatContainer';
 
+/*
+*  Parent container to display the content as per the active link in the sidebar.
+*/
 class Content extends Component {
 
   render() {

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { login } from '../utils/AuthService';
 
+/*
+*  Component displayed publically in the loggedout state.
+*/
 class Public extends Component {
     
       render() {

@@ -12,6 +12,10 @@ import Header from './Header';
 import { USER_CONNECTED, LOGOUT, VERIFY_USER } from '../utils/events';
 
 const socketUrl = 'http://localhost:8000/'
+
+/*
+*  Parent component of application. Handles socket connection for chat and contains the parent structural components for app.
+*/
 class App extends Component {
   constructor() {
     super();
@@ -28,6 +32,9 @@ class App extends Component {
     }
   }
 
+  /*
+  *  Sets the loggedin user state and connects it to socket connection for chat.
+  */
   setUser = () => {
     let user = getUser();
     this.setState({user: JSON.parse(user)});
@@ -35,6 +42,9 @@ class App extends Component {
     socket.emit(VERIFY_USER, user, this.connectUser)
   }
 
+  /*
+  *  Gets the socketId from server and sets the state.
+  */
   connectUser = (user) => {
     this.state.user.socketId = user.user.socketId;
     this.setState({user: this.state.user}, () => {
@@ -44,18 +54,25 @@ class App extends Component {
     
   }
   
+  /*
+  *  performs the tasks before logout.
+  */
   logout = () => {
 		const { socket } = this.state
 		socket.emit(LOGOUT)
 		this.setState({user:null})
 	}
 
+
   componentWillMount() {
 		var socket = io(socketUrl)
 		this.setState({ socket })
 		this.initSocket(socket)
 	}
-	
+  
+  /*
+  *  Initialize the socket and sets the state.
+  */
 	initSocket = (socket) => {
 		socket.on('connect', (value)=>{
       console.log('connected');
@@ -64,16 +81,25 @@ class App extends Component {
 		//socket.on('disconnect', this.reconnectUserInfo)
   }
 
+  /*
+  *  Sets the loggedin state.
+  */
   setLoginState = () => {
     this.setState({
       isLoggedIn: isLoggedIn()
     })
   }
 
+  /*
+  *  Sets the role of the loggedin user.
+  */
   setRole = (role) => {
     this.setState({ role })
   }
 
+  /*
+  *  Sets the default active link to be displayed when user logs in.
+  */
   setActiveLink = (link, data)=> {
     this.setState({
       activeLink: link,
@@ -82,13 +108,19 @@ class App extends Component {
     })
   }
 
+  /*
+  *  Sets the state for grades.
+  */
   setGradesState = (grades) => {
     this.setState({
       grades: grades
     })
   }
 
-   componentDidMount() {
+  /*
+  *  Starts the loading process and gets bulletin from api to display on active link.
+  */
+  componentDidMount() {
      this.setState({
        loading: true
      })
@@ -100,8 +132,11 @@ class App extends Component {
         })
         this.setActiveLink('bulletin', data);
       });
-   }
+  }
 
+  /*
+  *  Wrapper to redirect the relevant crud operation for bulletins.
+  */
    setBulletinState = (action, data) => {
     switch(action) {
       case 'addNew':
@@ -116,6 +151,9 @@ class App extends Component {
     }
    }
 
+  /*
+  *  Sets the bulletin state after adding new.
+  */
    addNewBulletin = (data) => {
     let { bulletin } = this.state;
     bulletin.messages.unshift(data);
@@ -124,6 +162,9 @@ class App extends Component {
     })
    }
 
+  /*
+  *  Sets the state for bulletin after update operation.
+  */
    updateBulletin = (id, data) => {
     let { bulletin } = this.state;
     let newMessages = bulletin.messages.map((message, key) => {
@@ -143,6 +184,9 @@ class App extends Component {
     })
    }
 
+  /*
+  *  Sets the state for bulletin after delete operation.
+  */
    deleteBulletin = (id) => {
     let { bulletin } = this.state;
     let newMessages = bulletin.messages.filter((message, key) => {
