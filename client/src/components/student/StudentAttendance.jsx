@@ -6,6 +6,9 @@ import moment from 'moment';
 import Attendance from './Attendance';
 import {getUserId} from '../../utils/AuthService';
 
+/*
+*  Populate the attendance for a student.
+*/
 class StudentAttendance extends Component {
     constructor() {
         super();
@@ -15,7 +18,10 @@ class StudentAttendance extends Component {
             user: null
         }
     }
-            
+    
+    /*
+    *  Takes date as a param and return the formatted date.
+    */
     getFormattedDate = (date) => {
         return  moment(date).format('YYYY-MM-DD')
     }
@@ -36,6 +42,9 @@ class StudentAttendance extends Component {
         this.setState({ date });
     }
     
+    /*
+    *  Compare two dates to check if they match. retun boolean..
+    */
     _isDateSame = (date1, date2) => {
         let dateOne = new Date(date1);
         let dateTwo = new Date(date2);

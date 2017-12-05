@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import StudentsList from './StudentsList';
 
+/*
+*  Component populated with the selected grade for teachers.
+*/
 class Grade extends Component {
   render() {
     return (

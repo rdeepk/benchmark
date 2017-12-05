@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Grade from './Grade';
 import {getAttendance} from '../../api/attendance';
 
+/*
+*  Top level container to display attendance for teachers.
+*/
 class GradesList extends Component {
   constructor() {
     super();
@@ -13,6 +16,9 @@ class GradesList extends Component {
     }
   }
 
+  /*
+  *  Called at on change event of grades dropdown used to display the grades the teacher connected with.
+  */
   handleGrades = (e) => {
     this.setState({
       selectedGrade: e.target.value,
@@ -20,7 +26,9 @@ class GradesList extends Component {
     })
   }
 
-
+  /*
+  *  Gets attendance to set state for teachers.
+  */
   setAttendance = () => {
     getAttendance()
     .then((data) => {
@@ -34,11 +42,17 @@ class GradesList extends Component {
     this.setAttendance();
   }
 
+  /*
+  *  updates state on addition if a new attendance object.
+  */
   addToAttendanceState = (data) => {
     this.state.attendance.push(data);
     this.setState({attendance: this.state.attendance});
   }
 
+  /*
+  *  Toggles the display of add new attendance form.
+  */
   toggleAttendanceFormDisplay = (e) => {
     e.preventDefault();
     const {displayAttendanceForm} = this.state;
@@ -47,6 +61,9 @@ class GradesList extends Component {
     })
   }
 
+  /*
+  *  Triggered  on the click of add new attendance form.
+  */
   displayAttendanceForm = (e) => {
     e.preventDefault();
     this.setState({
@@ -58,7 +75,7 @@ class GradesList extends Component {
 
     let gradeAttendance;
     let messageText;
-
+    //display the attendance for the selected grade.
     if(this.state.attendance) {
       if(this.state.selectedGrade === 'Select Grade') {
         messageText = <p className="highlight">Please select a Grade to View or add attendance.</p>
@@ -68,6 +85,8 @@ class GradesList extends Component {
         })
       }
     }
+
+    // Populate the grades dropdown
     let gradesSelectJSX;
     let gradeJSX;
     if(this.props.grades) {
