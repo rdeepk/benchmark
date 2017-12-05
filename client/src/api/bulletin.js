@@ -6,6 +6,9 @@ const ACCESS_TOKEN_KEY = getAccessToken();
 const ID_TOKEN_KEY = getIdToken();
 const BULLETINS = 'bulletins';
 
+/*
+*	updates local storage on adding new bulletin.
+*/
 let _addBulletinToLocalStorage = (data) => {
     let bulletins = JSON.parse(localStorage.getItem(BULLETINS));
     bulletins.messages.unshift(data)
@@ -16,6 +19,9 @@ let _addBulletinToLocalStorage = (data) => {
     localStorage.setItem(BULLETINS, JSON.stringify(newData));
 }
 
+/*
+*	updates local storage on editing existing bulletin.
+*/
 let _updateBulletinInLocalStorage = (data) => {
     let bulletins = JSON.parse(localStorage.getItem(BULLETINS));
     let newMessages = bulletins.messages.map((message, key) => {
@@ -32,6 +38,9 @@ let _updateBulletinInLocalStorage = (data) => {
     localStorage.setItem(BULLETINS, JSON.stringify(newState));
 }
 
+/*
+*	updates local storage on deleting a bulletin.
+*/
 let _deleteBulletinLocalStorage = (id) => {
     let bulletins = JSON.parse(localStorage.getItem(BULLETINS));
     let newMessages = bulletins.messages.filter((message, key) => {
@@ -46,6 +55,9 @@ let _deleteBulletinLocalStorage = (id) => {
     localStorage.setItem(BULLETINS, JSON.stringify(newState));
 }
 
+/*
+*	Gets all bulletins.
+*/
 export function getBulletin() {
     console.log(ACCESS_TOKEN_KEY);
     console.log(ID_TOKEN_KEY);
@@ -69,6 +81,9 @@ export function getBulletin() {
       })
 }
 
+/*
+*	sends post request to update existing bulletin.
+*/
 export function updateBulletin(doc) {
     return new Promise((resolve, reject) => {
         axios.post(`${baseUrl}/bulletin/update?id=${doc._id}`, doc,
@@ -88,6 +103,9 @@ export function updateBulletin(doc) {
 
 }
 
+/*
+*	sends delete request on deletion of a bulletin.
+*/
 export function deleteBulletin(id) {
     return new Promise((resolve, reject) => {
         axios.delete(`${baseUrl}/bulletin/delete?id=${id}`, 
@@ -106,7 +124,9 @@ export function deleteBulletin(id) {
       })
 }
 
-
+/*
+*	Sends post request on creation of a new bulletin.
+*/
 export function createBulletin(text) {
     return new Promise((resolve, reject) => {
         axios.post(`${baseUrl}/bulletin/create`, { message: text },

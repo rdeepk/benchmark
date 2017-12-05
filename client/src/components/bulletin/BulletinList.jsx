@@ -10,6 +10,9 @@ class BulletinList extends Component {
         }
     }
 
+    /*
+    *	Toggles the display of add new bulletin form.
+    */
     toggleAddNewFormDisplay = (event) => {
         event.preventDefault();
         const { displayAddNewBulletinForm } = this.state;
@@ -42,7 +45,8 @@ class BulletinList extends Component {
           </div>
           <div className="row">
             <div className="col-sm-12">
-              {(this.props.role === 'teacher' || this.props.role === 'admin') && <AddNewBulletin setBulletinState={this.props.setBulletinState}
+              {(this.props.role === 'teacher' || this.props.role === 'admin') && 
+                                      <AddNewBulletin setBulletinState={this.props.setBulletinState}
                                                       displayAddNewBulletinForm={this.state.displayAddNewBulletinForm}
                                                       toggleAddNewFormDisplay={this.toggleAddNewFormDisplay} />}
             </div>

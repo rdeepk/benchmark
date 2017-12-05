@@ -5,7 +5,9 @@ const baseUrl = 'http://localhost:8000';
 const ACCESS_TOKEN_KEY = getAccessToken();
 const ID_TOKEN_KEY = getIdToken();
 
-
+/*
+*	Gets attendence of children for parent.
+*/
 export function getAttendance(id) {
         return new Promise((resolve, reject) => {
             axios.get(`${baseUrl}/attendance/forParent?id=${id}`,  { headers: { 
@@ -23,6 +25,9 @@ export function getAttendance(id) {
    
 }
 
+/*
+*	Gets children for a parent.
+*/
 export function getChildren() {
     return new Promise((resolve, reject) => {
         axios.get(`${baseUrl}/parent/children`,  { headers: { 
@@ -40,6 +45,10 @@ export function getChildren() {
       })
 }
 
+
+/*
+*	send post request to create parent object.
+*/
 export function createParent() {
 
     let newParent = {
