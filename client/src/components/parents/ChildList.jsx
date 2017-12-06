@@ -58,7 +58,7 @@ class childList extends Component {
           </div>
           {this.state.selectedChild === 'Select Child'? <p>Please select the student to view attendance.</p>:''}
           <div style ={{display: this.state.displayChild}}>
-              <Child attendance={this.state.selectedAttendance} name={this.state.name} />
+              <Child attendance={this.state.selectedAttendance} name={this.state.name} selectedChild={this.state.selectedChild} />
             </div>
           </div>
         )

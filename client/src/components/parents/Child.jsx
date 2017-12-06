@@ -74,13 +74,12 @@ class Child extends Component {
             attendanceJSX = attendanceData.map((item, i) => {
                 //lets check if user from the absent array.
                     item.absent.filter((elem, i) => {
-                        if(elem._id === userId) {
+                        if(elem._id === this.props.selectedChild) {
                             present = false;
                             return true
                         }
                         return false;
                     })
-                    
                 return <Attendance attendance={item} present={present}/>
             })
         }
