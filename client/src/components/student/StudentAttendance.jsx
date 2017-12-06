@@ -86,6 +86,7 @@ class StudentAttendance extends Component {
 
             attendanceJSX = attendanceData.map((item, i) => {
                 //lets check if user from the absent array.
+                present = true;
                     item.absent.filter((elem, i) => {
                         if(elem._id === userId) {
                             present = false;

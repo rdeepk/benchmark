@@ -45,6 +45,7 @@ class Child extends Component {
     }
 
   render() {
+      console.log("here");
     let attendanceData, attendanceJSX, present = true, userData, attendanceHeaderJSX, grade, teacher, attendanceSubHeaderJSX;
     let userId = getUserId();
 
@@ -70,8 +71,8 @@ class Child extends Component {
                                         <div className="col-md-4">Attendance</div>
                                     </div>
 
-
             attendanceJSX = attendanceData.map((item, i) => {
+                present = true;
                 //lets check if user from the absent array.
                     item.absent.filter((elem, i) => {
                         if(elem._id === this.props.selectedChild) {
