@@ -45,7 +45,6 @@ class Child extends Component {
     }
 
   render() {
-      console.log("here");
     let attendanceData, attendanceJSX, present = true, userData, attendanceHeaderJSX, grade, teacher, attendanceSubHeaderJSX;
     let userId = getUserId();
 

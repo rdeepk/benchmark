@@ -71,6 +71,9 @@ module.exports = function (socket) {
 
     //user sends message 6
     socket.on(MESSAGE_SENT, function ({ chatId, message  }) {
+        console.log("userss  ", connectedUsers);
+        console.log(chatId)
+        console.log(message)
         sendMessageToChatFromUser(chatId, message)
     })
 
@@ -117,6 +120,7 @@ function removeUser(userList, username) {
 * @return function(chatId, message)
 */
 sendMessageToChat = (sender) => {
+    console.log("sendin....")
    return (chatId, message) => {
                 io.emit(`${MESSAGE_RECIEVED}-${chatId}`, createMessage({message, sender}))
               }

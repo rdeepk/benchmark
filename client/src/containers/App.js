@@ -66,8 +66,13 @@ class App extends Component {
 
   componentWillMount() {
 		var socket = io(socketUrl)
-		this.setState({ socket })
-		this.initSocket(socket)
+    this.initSocket(socket)
+    this.setState({ socket }, () => {
+      if(this.state.isLoggedIn) {
+        // socket.emit(USER_CONNECTED, this.state.user);
+        this.setUser();
+      }
+    })
 	}
   
   /*
