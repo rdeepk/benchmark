@@ -152,7 +152,7 @@ class App extends Component {
     if(!this.state.isLoggedIn) {
       return (
         <div className="App">
-        <Route path="/callback" exact render={(props) => (<Callback setLoginState={this.setLoginState} />
+        <Route path="/callback" exact render={(props) => (< Callback setLoginState={this.setLoginState} />
                 )} />
           <Public />
         </div>
@@ -185,7 +185,7 @@ class App extends Component {
                       role={this.state.role} />
           </div>
         </div>
-        <Route path="/callback" exact render={(props) => (<Callback />
+        <Route path="/callback" exact render={(props) => ( <Callback />
                 )} />
       </div>
       </div>
