@@ -71,9 +71,6 @@ module.exports = function (socket) {
 
     //user sends message 6
     socket.on(MESSAGE_SENT, function ({ chatId, message  }) {
-        console.log("userss  ", connectedUsers);
-        console.log(chatId)
-        console.log(message)
         sendMessageToChatFromUser(chatId, message)
     })
 
