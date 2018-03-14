@@ -5,6 +5,10 @@ var jwtDecode = require('jwt-decode');
 
 var attendanceController = {};
 
+
+ /*
+ *  Returns current date in yyyy-mm-dd format.
+ */
 _getCurrentDate = () => {
   var today = new Date();
   var dd = today.getDate();
@@ -21,12 +25,15 @@ _getCurrentDate = () => {
   return yyyy + '-' + mm + '-' + dd;
 }
 
+
+/*
+*  Returns all grades of students.
+*/
 _getAllGrades = () => {
   return Grade.find()
 }
 
 _getGradeForStudent = (grades, studentId) => {
-  console.log("here");
     for(let i = 0; i < grades.length; i++){
       if(grades[i].students.length > 0) {
         for(let k=0; k <grades[i].students.length; k++) {
