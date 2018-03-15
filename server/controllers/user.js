@@ -8,6 +8,9 @@ var jwtDecode = require('jwt-decode');
 var token;
 var userController = {};
 
+ /*
+ *  Check if the token for auth0 is valid or expired.
+ */
 isTokenValid = (token) => {
   if (!token) {
     return false;
@@ -18,6 +21,9 @@ isTokenValid = (token) => {
   return (decoded.exp>=cTs);
 }
 
+ /*
+ *  Get token for auth0.
+ */
 getToken = () => {
       var options = { method: 'POST',
       uri: 'https://bench.auth0.com/oauth/token',
@@ -32,6 +38,9 @@ getToken = () => {
     return request(options); 
 }
 
+ /*
+ *  Saves the user in auth0.
+ */
 saveUserInAuth0 = (doc) => {
   Role.findOne({_id: doc.role}).then((role) => {
     let options = { method: 'POST',
@@ -63,6 +72,9 @@ saveUserInAuth0 = (doc) => {
   });
 }
 
+ /*
+ *  Makes the data for saving user in auth0.
+ */
 setUserForAuth0 = (doc) => {
   if(!isTokenValid(token)) {
     getToken()
@@ -80,7 +92,9 @@ setUserForAuth0 = (doc) => {
 }
 
 
-
+ /*
+ *  Save new user.
+ */
 userController.create = (req,res,next) => {
     var newUser = new User({
       name: req.body.name,
@@ -96,7 +110,9 @@ userController.create = (req,res,next) => {
     });
    }
 
-
+/*
+*	Returns the links to be displayed as per the access level of user to the client.
+*/
 userController.getLinks = (req,res,next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
@@ -130,7 +146,9 @@ userController.getLinks = (req,res,next) => {
 }
 
 
-
+ /*
+ *  Wrapper to save multiple users in auth0.
+ */
 userController.SaveAllUsersInAuth0 = (req, res, next) => {
   User.find().then((users) => {
    users.forEach((user, i) => {
@@ -139,6 +157,9 @@ userController.SaveAllUsersInAuth0 = (req, res, next) => {
   });
 }
 
+ /*
+ *  Returns user with the given id.
+ */
 userController.getUserById = (req, res, next) => {
   User.findOne({_id: req.query.id})
   .then((user) => {
