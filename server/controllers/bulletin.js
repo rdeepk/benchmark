@@ -4,6 +4,9 @@ var jwtDecode = require('jwt-decode');
 
 var bulletinController = {};
 
+ /*
+ *  Check if the given role has write access.
+ */
 let _hasWriteAccess = (role) => {
   switch(role) {
     case 'admin':
@@ -15,6 +18,9 @@ let _hasWriteAccess = (role) => {
   }
 }
 
+ /*
+ *  Create new bulletin.
+ */
 bulletinController.create = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
@@ -40,6 +46,9 @@ bulletinController.create = (req, res, next) => {
   }
 }
 
+ /*
+ *  Retrieve all messages.
+ */
 bulletinController.getMessages = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
@@ -58,6 +67,9 @@ bulletinController.getMessages = (req, res, next) => {
   });
 }
 
+ /*
+ *  UPdate the message.
+ */
 bulletinController.update = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
@@ -78,6 +90,9 @@ bulletinController.update = (req, res, next) => {
   }
 }
 
+ /*
+ *  Deletes a bulletin.
+ */
 bulletinController.delete = (req, res, next) => {
   let decoded = jwtDecode(req.headers.id_token);
   let role = decoded.bench_app_metadata.role;
