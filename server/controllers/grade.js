@@ -4,6 +4,9 @@ var {Grade} = require('./../models/grade');
 
 var gradeController = {};
 
+/*
+ *  Create a new grade object.
+ */
 gradeController.create = (req,res,next) => {
     var newGrade = new Grade({
       name: req.body.name,
